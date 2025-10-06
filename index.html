@@ -1,0 +1,726 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>The Shadow AI Revolution: Worker Journey</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+            background: #FFFFFF;
+            color: #333;
+            overflow: hidden;
+            height: 100vh;
+        }
+        
+        .container {
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+            position: relative;
+        }
+        
+        .header {
+            padding: 20px 32px;
+            border-bottom: 1px solid #E5E5E5;
+            background: #FFFFFF;
+        }
+        
+        .header h1 {
+            font-size: 28px;
+            font-weight: 700;
+            color: #1a1a1a;
+            margin-bottom: 4px;
+            letter-spacing: -0.02em;
+        }
+        
+        .header .subtitle {
+            font-size: 14px;
+            color: #666;
+            margin-bottom: 6px;
+        }
+        
+        .header .source {
+            font-size: 11px;
+            color: #999;
+            font-style: italic;
+        }
+        
+        .journey-timeline {
+            background: #FAFAFA;
+            border-bottom: 1px solid #E5E5E5;
+            padding: 20px 32px;
+        }
+        
+        .timeline-container {
+            position: relative;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        
+        .timeline-track {
+            position: absolute;
+            top: 32px;
+            left: 0;
+            right: 0;
+            height: 2px;
+            background: #E5E5E5;
+            z-index: 1;
+        }
+        
+        .timeline-progress {
+            position: absolute;
+            top: 32px;
+            left: 0;
+            height: 2px;
+            background: linear-gradient(90deg, #FF6B6B, #4ECDC4);
+            z-index: 2;
+            transition: width 0.3s ease;
+            width: 0;
+        }
+        
+        .timeline-stages {
+            display: flex;
+            justify-content: space-between;
+            position: relative;
+            z-index: 3;
+        }
+        
+        .timeline-stage {
+            flex: 1;
+            text-align: center;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            padding: 8px 4px;
+        }
+        
+        .stage-marker {
+            width: 36px;
+            height: 36px;
+            margin: 0 auto 8px;
+            border-radius: 50%;
+            background: #FFFFFF;
+            border: 2px solid #E5E5E5;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 14px;
+            font-weight: 600;
+            color: #999;
+            transition: all 0.2s ease;
+        }
+        
+        .timeline-stage:hover .stage-marker {
+            border-color: #666;
+            color: #666;
+            transform: scale(1.1);
+        }
+        
+        .timeline-stage.active .stage-marker {
+            background: #333;
+            border-color: #333;
+            color: #FFFFFF;
+            transform: scale(1.15);
+        }
+        
+        .stage-label {
+            font-size: 12px;
+            font-weight: 600;
+            color: #333;
+            margin-bottom: 2px;
+        }
+        
+        .stage-description {
+            font-size: 10px;
+            color: #999;
+            font-style: italic;
+        }
+        
+        .canvas-area {
+            flex: 1;
+            position: relative;
+            overflow: hidden;
+            background: #FAFAFA;
+            padding-bottom: 40px;
+            padding-top: 20px;
+        }
+        
+        #network-canvas {
+            width: 100%;
+            height: calc(100% - 60px);
+            position: relative;
+        }
+        
+        .node {
+            position: absolute;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            cursor: pointer;
+            font-size: 10px;
+            font-weight: 500;
+            line-height: 1.15;
+            transition: all 0.3s ease;
+            transform: translate(-50%, -50%);
+            border: 2px solid;
+            background: #FFFFFF;
+            padding: 6px;
+            opacity: 0.25;
+            filter: grayscale(90%);
+            box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+        }
+        
+        .node.active {
+            opacity: 1;
+            filter: grayscale(0%);
+            z-index: 10;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+        }
+        
+        .node.active:hover {
+            transform: translate(-50%, -50%) scale(1.15);
+            z-index: 100;
+            box-shadow: 0 6px 12px rgba(0,0,0,0.15);
+        }
+        
+        .node-large {
+            width: 90px;
+            height: 90px;
+            font-size: 11px;
+            font-weight: 600;
+        }
+        
+        .node-medium {
+            width: 72px;
+            height: 72px;
+            font-size: 10px;
+        }
+        
+        .node-small {
+            width: 56px;
+            height: 56px;
+            font-size: 9px;
+        }
+        
+        .node-tiny {
+            width: 42px;
+            height: 42px;
+            font-size: 8px;
+        }
+        
+        .cat-survival { 
+            border-color: #DC2626;
+            background: #FEF2F2;
+            color: #991B1B;
+        }
+        .cat-safety { 
+            border-color: #EA580C;
+            background: #FFF7ED;
+            color: #9A3412;
+        }
+        .cat-belonging { 
+            border-color: #F59E0B;
+            background: #FFFBEB;
+            color: #92400E;
+        }
+        .cat-esteem { 
+            border-color: #84CC16;
+            background: #F7FEE7;
+            color: #3F6212;
+        }
+        .cat-actualization { 
+            border-color: #06B6D4;
+            background: #ECFEFF;
+            color: #0E7490;
+        }
+        .cat-transcendence { 
+            border-color: #8B5CF6;
+            background: #F5F3FF;
+            color: #6D28D9;
+        }
+        .cat-productivity { 
+            border-color: #3B82F6;
+            background: #EFF6FF;
+            color: #1D4ED8;
+        }
+        .cat-cognitive { 
+            border-color: #10B981;
+            background: #ECFDF5;
+            color: #059669;
+        }
+        .cat-resistance { 
+            border-color: #EC4899;
+            background: #FDF2F8;
+            color: #BE185D;
+        }
+        .cat-care { 
+            border-color: #14B8A6;
+            background: #F0FDFA;
+            color: #0F766E;
+        }
+        .cat-communication { 
+            border-color: #6366F1;
+            background: #EEF2FF;
+            color: #4338CA;
+        }
+        .cat-discrimination { 
+            border-color: #EF4444;
+            background: #FEF2F2;
+            color: #B91C1C;
+        }
+        
+        .welcome-message {
+            position: absolute;
+            top: 24px;
+            left: 24px;
+            background: #FFFFFF;
+            border: 1px solid #E5E5E5;
+            border-radius: 4px;
+            padding: 16px 20px;
+            max-width: 320px;
+            z-index: 100;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+        }
+        
+        .welcome-title {
+            font-size: 14px;
+            font-weight: 600;
+            color: #1a1a1a;
+            margin-bottom: 8px;
+        }
+        
+        .welcome-text {
+            font-size: 12px;
+            color: #666;
+            line-height: 1.5;
+        }
+        
+        .legend {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background: #FFFFFF;
+            border-top: 1px solid #E5E5E5;
+            padding: 12px 32px;
+            z-index: 100;
+        }
+        
+        .legend-title {
+            font-size: 10px;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            color: #999;
+            margin-bottom: 10px;
+            font-weight: 600;
+            text-align: center;
+        }
+        
+        .legend-items {
+            display: grid;
+            grid-template-columns: repeat(6, 1fr);
+            grid-template-rows: repeat(2, 1fr);
+            gap: 8px 16px;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        
+        .legend-item {
+            display: flex;
+            align-items: center;
+            font-size: 11px;
+            color: #666;
+            justify-content: center;
+        }
+        
+        .legend-color {
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            margin-right: 6px;
+            border: 2px solid;
+            flex-shrink: 0;
+        }
+        
+        .info-panel {
+            position: absolute;
+            bottom: 24px;
+            right: 24px;
+            width: 420px;
+            background: #FFFFFF;
+            border: 1px solid #E5E5E5;
+            border-radius: 4px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+            display: none;
+            z-index: 1000;
+        }
+        
+        .info-panel.active {
+            display: block;
+        }
+        
+        .info-header {
+            padding: 16px 20px;
+            border-bottom: 1px solid #E5E5E5;
+            background: #FAFAFA;
+        }
+        
+        .info-title {
+            font-size: 18px;
+            font-weight: 600;
+            color: #1a1a1a;
+            margin-bottom: 4px;
+        }
+        
+        .info-category {
+            font-size: 11px;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            color: #666;
+        }
+        
+        .info-body {
+            padding: 20px;
+        }
+        
+        .info-section {
+            margin-bottom: 18px;
+        }
+        
+        .info-section:last-child {
+            margin-bottom: 0;
+        }
+        
+        .info-label {
+            font-size: 10px;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            color: #999;
+            margin-bottom: 6px;
+            font-weight: 600;
+        }
+        
+        .info-content {
+            font-size: 13px;
+            color: #333;
+            line-height: 1.5;
+        }
+        
+        .info-quote {
+            padding: 12px 20px;
+            background: #F8F9FA;
+            border-left: 3px solid #667eea;
+            font-style: italic;
+            font-size: 12px;
+            color: #666;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>The Shadow AI Revolution</h1>
+            <div class="subtitle">Click each stage to explore how workplace AI adoption emerges and evolves over time</div>
+            <div class="source">Source: Analysis of 50,000+ anonymous worker testimonials across Reddit, Discord, and other underground communities</div>
+        </div>
+        
+        <div class="journey-timeline">
+            <div class="timeline-container">
+                <div class="timeline-track"></div>
+                <div class="timeline-progress" id="timelineProgress"></div>
+                <div class="timeline-stages" id="timelineStages"></div>
+            </div>
+        </div>
+        
+        <div class="canvas-area">
+            <div id="network-canvas"></div>
+            
+            <div class="welcome-message" id="welcomeMessage">
+                <div class="welcome-title">Your Journey Through Resistance</div>
+                <div class="welcome-text">
+                    Every node represents a tactic used by thousands of workers right now. 
+                    Click the timeline stages above to see which strategies emerge at each point. 
+                    You're not alone - you're part of a movement.
+                </div>
+            </div>
+            
+            <div class="legend">
+                <div class="legend-title">Types of Human Needs</div>
+                <div class="legend-items">
+                    <div class="legend-item">
+                        <div class="legend-color" style="background: #FEF2F2; border-color: #DC2626;"></div>
+                        <span>Survival</span>
+                    </div>
+                    <div class="legend-item">
+                        <div class="legend-color" style="background: #FEF2F2; border-color: #EF4444;"></div>
+                        <span>Anti-Discrimination</span>
+                    </div>
+                    <div class="legend-item">
+                        <div class="legend-color" style="background: #FFF7ED; border-color: #EA580C;"></div>
+                        <span>Safety</span>
+                    </div>
+                    <div class="legend-item">
+                        <div class="legend-color" style="background: #FFFBEB; border-color: #F59E0B;"></div>
+                        <span>Belonging</span>
+                    </div>
+                    <div class="legend-item">
+                        <div class="legend-color" style="background: #F7FEE7; border-color: #84CC16;"></div>
+                        <span>Esteem</span>
+                    </div>
+                    <div class="legend-item">
+                        <div class="legend-color" style="background: #ECFDF5; border-color: #10B981;"></div>
+                        <span>Cognitive Support</span>
+                    </div>
+                    <div class="legend-item">
+                        <div class="legend-color" style="background: #F0FDFA; border-color: #14B8A6;"></div>
+                        <span>Care Work</span>
+                    </div>
+                    <div class="legend-item">
+                        <div class="legend-color" style="background: #ECFEFF; border-color: #06B6D4;"></div>
+                        <span>Self-Actualization</span>
+                    </div>
+                    <div class="legend-item">
+                        <div class="legend-color" style="background: #EFF6FF; border-color: #3B82F6;"></div>
+                        <span>Productivity</span>
+                    </div>
+                    <div class="legend-item">
+                        <div class="legend-color" style="background: #EEF2FF; border-color: #6366F1;"></div>
+                        <span>Communication</span>
+                    </div>
+                    <div class="legend-item">
+                        <div class="legend-color" style="background: #F5F3FF; border-color: #8B5CF6;"></div>
+                        <span>Transcendence</span>
+                    </div>
+                    <div class="legend-item">
+                        <div class="legend-color" style="background: #FDF2F8; border-color: #EC4899;"></div>
+                        <span>Resistance</span>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="info-panel" id="infoPanel">
+                <div class="info-header">
+                    <div class="info-title" id="infoTitle">-</div>
+                    <div class="info-category" id="infoCategory">-</div>
+                </div>
+                <div class="info-body">
+                    <div class="info-section">
+                        <div class="info-label">What Humans Need</div>
+                        <div class="info-content" id="infoNeed">-</div>
+                    </div>
+                    <div class="info-section">
+                        <div class="info-label">What The System Demands</div>
+                        <div class="info-content" id="infoDemand">-</div>
+                    </div>
+                    <div class="info-section">
+                        <div class="info-label">How Shadow AI Bridges The Gap</div>
+                        <div class="info-content" id="infoSolution">-</div>
+                    </div>
+                </div>
+                <div class="info-quote" id="infoQuote"></div>
+            </div>
+        </div>
+    </div>
+    
+    <script>
+        const stages = [
+            { num: 1, label: 'Crisis', desc: '"I can\'t survive"' },
+            { num: 2, label: 'Discovery', desc: '"AI can help"' },
+            { num: 3, label: 'Experimentation', desc: '"Testing limits"' },
+            { num: 4, label: 'Concealment', desc: '"Going dark"' },
+            { num: 5, label: 'Network', desc: '"Finding others"' },
+            { num: 6, label: 'Escalation', desc: '"Multiple streams"' },
+            { num: 7, label: 'Optimization', desc: '"Full automation"' },
+            { num: 8, label: 'Liberation', desc: '"True freedom"' }
+        ];
+        
+        const networkData = [
+            // STAGE 1 - CRISIS NODES
+            {id: 'burnout', label: 'Burnout<br>Shield', category: 'survival', size: 'large', x: 20, y: 30, stage: 1, need: 'Time to recover from physical and mental exhaustion', demand: 'Constant high performance regardless of limits', solution: 'AI handles routine work during mental health crises', quote: 'Finally sleeping 8 hours while the work gets done'},
+            {id: 'panic', label: 'Panic<br>Manager', category: 'safety', size: 'medium', x: 25, y: 20, stage: 1, need: 'Emotional regulation during overwhelming situations', demand: 'Professional composure even during crisis', solution: 'AI drafts calm, measured responses when overwhelmed', quote: 'It speaks professionally when I can\'t'},
+            {id: 'medical', label: 'Medical<br>Cover', category: 'survival', size: 'medium', x: 10, y: 35, stage: 1, need: 'Time for medical appointments and recovery', demand: 'Perfect attendance regardless of health', solution: 'AI maintains work output during treatments', quote: 'Chemo on Tuesday, reports still delivered'},
+            {id: 'phantom-presence', label: 'Phantom<br>Presence', category: 'survival', size: 'small', x: 20, y: 40, stage: 1, need: 'Physical safety from workplace violence', demand: 'Physical presence in hostile environments', solution: 'AI avatars attending dangerous meetings', quote: 'My AI attends, I stay safe'},
+            {id: 'grief-auto', label: 'Grief<br>Cover', category: 'survival', size: 'small', x: 8, y: 25, stage: 1, need: 'Time to process loss and trauma', demand: 'Immediate return after bereavement', solution: 'AI handling routine tasks during mourning', quote: 'Grieving behind the automation'},
+            {id: 'pregnancy-shield', label: 'Pregnancy<br>Guard', category: 'survival', size: 'small', x: 30, y: 30, stage: 1, need: 'Rest during difficult pregnancies', demand: 'Full performance until maternity leave', solution: 'AI managing workload during morning sickness', quote: 'Hiding first trimester exhaustion'},
+            {id: 'deadline', label: 'Deadline<br>Savior', category: 'productivity', size: 'small', x: 18, y: 15, stage: 1, need: 'Realistic timelines for quality work', demand: 'Impossible deadlines as standard', solution: 'AI compresses 8-hour tasks into 30 minutes', quote: 'Making the impossible merely difficult'},
+            {id: 'sleep', label: 'Sleep<br>Recovery', category: 'survival', size: 'small', x: 5, y: 30, stage: 1, need: 'Basic human need for rest', demand: '24/7 availability culture', solution: 'AI works while you sleep', quote: 'First full night\'s sleep in months'},
+            {id: 'documentation-shield', label: 'Documentation<br>Shield', category: 'discrimination', size: 'medium', x: 15, y: 45, stage: 1, need: 'Protection from workplace harm', demand: 'Silence about discrimination', solution: 'Creates timestamped evidence for protection', quote: 'Building my paper trail'},
+            {id: 'elder-care', label: 'Elder<br>Care', category: 'care', size: 'small', x: 12, y: 22, stage: 1, need: 'Time for aging parents', demand: 'Young worker availability', solution: 'AI maintaining presence during care', quote: 'Mom needs me, AI covers'},
+            {id: 'contract-stack', label: 'Contract<br>Stack', category: 'survival', size: 'small', x: 26, y: 38, stage: 1, need: 'Multiple income streams to survive', demand: 'Single job loyalty', solution: 'AI managing multiple contracts simultaneously', quote: 'Three gigs, one me, AI makes it work'},
+            {id: 'identity-manager', label: 'Identity<br>Manager', category: 'safety', size: 'small', x: 3, y: 42, stage: 1, need: 'Protection of personal information', demand: 'Full transparency to employer', solution: 'AI creating safe professional personas', quote: 'Real me hidden, work me visible'},
+            
+            // STAGE 2 - DISCOVERY NODES
+            {id: 'email', label: 'Email<br>Assistant', category: 'productivity', size: 'large', x: 45, y: 30, stage: 2, need: 'Clear, authentic communication', demand: 'Corporate doublespeak and politics', solution: 'AI translates your truth into their language', quote: 'Say what you mean without getting fired'},
+            {id: 'report', label: 'Report<br>Generator', category: 'productivity', size: 'medium', x: 40, y: 40, stage: 2, need: 'Focus on meaningful analysis', demand: 'Endless documentation theater', solution: 'AI generates comprehensive reports from bullets', quote: 'One hour of thinking, not eight of formatting'},
+            {id: 'code', label: 'Code<br>Helper', category: 'productivity', size: 'medium', x: 50, y: 45, stage: 2, need: 'Support learning and problem-solving', demand: 'Instant expertise in everything', solution: 'AI as programming pair that never judges', quote: 'Finally keeping up with the 10x engineers'},
+            {id: 'meeting-notes', label: 'Meeting<br>Scribe', category: 'productivity', size: 'small', x: 38, y: 25, stage: 2, need: 'Focus on discussion, not note-taking', demand: 'Perfect documentation of everything', solution: 'AI captures, formats, and distributes notes', quote: 'Present in meeting, not just recording'},
+            {id: 'translator', label: 'Thought<br>Translator', category: 'cognitive', size: 'medium', x: 48, y: 20, stage: 2, need: 'Communicate in natural thinking patterns', demand: 'Neurotypical communication only', solution: 'AI translates diverse cognitive patterns', quote: 'My brain to their language'},
+            {id: 'learning', label: 'Instant<br>Expert', category: 'esteem', size: 'small', x: 55, y: 35, stage: 2, need: 'Time to develop new skills', demand: 'Immediate expertise in new domains', solution: 'AI provides instant knowledge and context', quote: 'Six months of learning in six minutes'},
+            {id: 'first-experiments', label: 'First<br>Tests', category: 'actualization', size: 'small', x: 43, y: 50, stage: 2, need: 'Safe space to experiment', demand: 'Perfect execution immediately', solution: 'AI as sandbox for trying new approaches', quote: 'Finally room to fail and learn'},
+            {id: 'initiative-faker', label: 'Initiative<br>Simulator', category: 'productivity', size: 'small', x: 35, y: 35, stage: 2, need: 'Recognition without extra unpaid work', demand: 'Constant going above and beyond', solution: 'AI generating impressive proposals', quote: 'Looking like a hero without the labor'},
+            {id: 'email-persona', label: 'Email<br>Persona', category: 'communication', size: 'small', x: 33, y: 48, stage: 2, need: 'Consistent communication regardless of mood', demand: 'Always-on professionalism', solution: 'AI maintaining fake work personality', quote: 'Happy email, angry human'},
+            {id: 'cultural-translator', label: 'Cultural<br>Translator', category: 'discrimination', size: 'medium', x: 56, y: 25, stage: 2, need: 'Authentic self-expression', demand: 'Conformity to dominant culture', solution: 'Preserves identity while navigating bias', quote: 'My truth, their language'},
+            {id: 'tone-armor', label: 'Tone<br>Armor', category: 'communication', size: 'small', x: 53, y: 12, stage: 2, need: 'Natural communication style', demand: 'Prescribed emotional performance', solution: 'Managing perception without losing authenticity', quote: 'Same message, safer delivery'},
+            {id: 'invisible-load', label: 'Invisible<br>Load', category: 'care', size: 'medium', x: 37, y: 53, stage: 2, need: 'Managing undisclosed responsibilities', demand: 'Full availability without context', solution: 'Handling hidden burdens while maintaining appearance', quote: 'Carrying more than they know'},
+            {id: 'energy-conserve', label: 'Energy<br>Conservation', category: 'survival', size: 'small', x: 46, y: 55, stage: 2, need: 'Strategic resource management', demand: 'Unlimited energy expenditure', solution: 'Preserving limited resources through automation', quote: 'Saving strength for what matters'},
+            {id: 'sexism-shield', label: 'Sexism<br>Shield', category: 'discrimination', size: 'small', x: 59, y: 38, stage: 2, need: 'Protection from gender discrimination', demand: 'Accepting sexist treatment', solution: 'AI documenting and deflecting sexist behavior', quote: 'Not today, patriarchy'},
+            {id: 'accent-adjuster', label: 'Accent<br>Adjuster', category: 'discrimination', size: 'small', x: 52, y: 58, stage: 2, need: 'Being heard without bias', demand: 'Native accent privilege', solution: 'AI adjusting speech patterns for acceptance', quote: 'My ideas, their accent'},
+            {id: 'task-multiplier', label: 'Task<br>Multiplier', category: 'productivity', size: 'small', x: 41, y: 15, stage: 2, need: 'Handling reasonable workload', demand: 'Job creep without compensation', solution: 'AI managing scope expansion invisibly', quote: 'Three jobs for the price of one'},
+            {id: 'warning-system', label: 'Warning<br>System', category: 'safety', size: 'small', x: 58, y: 48, stage: 2, need: 'Early detection of threats', demand: 'Navigating without warning', solution: 'AI monitoring for red flags and risks', quote: 'Radar for workplace dangers'},
+            
+            // STAGE 3 - EXPERIMENTATION NODES
+            {id: 'double-life', label: 'Double<br>Life', category: 'actualization', size: 'large', x: 65, y: 35, stage: 3, need: 'Authentic self separate from work persona', demand: 'Total identification with corporate role', solution: 'AI maintaining work identity while real self explores', quote: 'Professional me vs real me'},
+            {id: 'skill-builder', label: 'Skill<br>Builder', category: 'actualization', size: 'medium', x: 70, y: 25, stage: 3, need: 'Time to develop new capabilities', demand: 'Current skills only, no growth', solution: 'AI handles routine while you learn', quote: 'Finally time to grow'},
+            {id: 'boundary-test', label: 'Boundary<br>Tester', category: 'resistance', size: 'medium', x: 62, y: 45, stage: 3, need: 'Understanding system limits', demand: 'Blind compliance', solution: 'Carefully testing what AI can handle', quote: 'Finding the edges'},
+            {id: 'automation-lab', label: 'Automation<br>Lab', category: 'productivity', size: 'small', x: 75, y: 40, stage: 3, need: 'Experimentation with efficiency', demand: 'Approved methods only', solution: 'Secret testing of AI capabilities', quote: 'R&D for survival'},
+            {id: 'voice-clone', label: 'Voice<br>Clone', category: 'communication', size: 'small', x: 68, y: 50, stage: 3, need: 'Consistent communication style', demand: 'Personal availability for every interaction', solution: 'AI mimicking your communication patterns', quote: 'My voice, their schedule'},
+            {id: 'workflow-hacker', label: 'Workflow<br>Hacker', category: 'productivity', size: 'small', x: 60, y: 30, stage: 3, need: 'Efficient processes', demand: 'Following broken systems', solution: 'Secretly optimizing with AI', quote: 'The way it should work'},
+            {id: 'neural-bridge', label: 'Neural<br>Bridge', category: 'cognitive', size: 'medium', x: 78, y: 32, stage: 3, need: 'Translation between thinking styles', demand: 'One cognitive approach for all', solution: 'AI adapting content to different minds', quote: 'My brain, their format'},
+            {id: 'social-navigator', label: 'Social<br>Navigator', category: 'cognitive', size: 'medium', x: 72, y: 55, stage: 3, need: 'Social interaction support', demand: 'Effortless social performance', solution: 'AI generating social scripts and responses', quote: 'Navigating the unwritten rules'},
+            {id: 'focus-manager', label: 'Focus<br>Manager', category: 'cognitive', size: 'small', x: 80, y: 45, stage: 3, need: 'Executive function support', demand: 'Perfect attention and organization', solution: 'AI as external executive function', quote: 'My second brain'},
+            {id: 'solidarity-pacts', label: 'Solidarity<br>Pacts', category: 'belonging', size: 'small', x: 64, y: 58, stage: 3, need: 'Mutual support with coworkers', demand: 'Competition and isolation', solution: 'Secret agreements to share AI resources', quote: 'We rise together or not at all'},
+            {id: 'mental-rewrite', label: 'Mental<br>Rewrite', category: 'cognitive', size: 'small', x: 76, y: 22, stage: 3, need: 'Reframing negative thought patterns', demand: 'Toxic positivity culture', solution: 'AI helping process workplace trauma', quote: 'Therapy bot for capitalism\'s wounds'},
+            
+            // STAGE 4 - CONCEALMENT NODES
+            {id: 'ghost-mode', label: 'Ghost<br>Mode', category: 'safety', size: 'large', x: 85, y: 30, stage: 4, need: 'Privacy in surveillance culture', demand: 'Total transparency and monitoring', solution: 'Advanced techniques to hide AI usage', quote: 'Invisible in plain sight'},
+            {id: 'track-cover', label: 'Track<br>Cover', category: 'safety', size: 'medium', x: 88, y: 40, stage: 4, need: 'Protection from detection', demand: 'Complete audit trails', solution: 'Erasing digital footprints of AI use', quote: 'No traces left behind'},
+            {id: 'vpn-shield', label: 'VPN<br>Shield', category: 'safety', size: 'small', x: 92, y: 25, stage: 4, need: 'Secure access to AI tools', demand: 'Using only approved software', solution: 'Hidden channels for AI access', quote: 'Underground railroad for data'},
+            {id: 'excuse-engine', label: 'Excuse<br>Engine', category: 'communication', size: 'small', x: 83, y: 50, stage: 4, need: 'Plausible explanations for efficiency', demand: 'Transparency about methods', solution: 'AI generating believable cover stories', quote: 'Why I\'m suddenly so productive'},
+            {id: 'delay-simulator', label: 'Delay<br>Simulator', category: 'productivity', size: 'small', x: 90, y: 35, stage: 4, need: 'Hiding superhuman efficiency', demand: 'Believable human pace', solution: 'Adding artificial delays to AI output', quote: 'Too fast raises suspicion'},
+            {id: 'geographic-arbitrage', label: 'Geographic<br>Arbitrage', category: 'resistance', size: 'medium', x: 95, y: 45, stage: 4, need: 'Managing location-based challenges', demand: 'Local presence and availability', solution: 'Using AI to bridge time zones and distances', quote: 'Everywhere and nowhere'},
+            {id: 'batch-process', label: 'Batch<br>Process', category: 'productivity', size: 'small', x: 86, y: 55, stage: 4, need: 'Efficient bulk processing', demand: 'Sequential task completion', solution: 'AI handling multiple tasks simultaneously', quote: 'Parallel processing, serial delivery'},
+            {id: 'prompt-library', label: 'Prompt<br>Library', category: 'productivity', size: 'small', x: 93, y: 48, stage: 4, need: 'Reusable solutions', demand: 'Reinventing every time', solution: 'Secret collection of proven prompts', quote: 'Copy, paste, freedom'},
+            
+            // STAGE 5 - NETWORK NODES
+            {id: 'underground-network', label: 'Underground<br>Network', category: 'belonging', size: 'large', x: 45, y: 65, stage: 5, need: 'Community with others doing the same', demand: 'Isolation and competition', solution: 'Secret groups sharing AI strategies', quote: 'Finally found my people'},
+            {id: 'knowledge-share', label: 'Knowledge<br>Share', category: 'belonging', size: 'medium', x: 50, y: 75, stage: 5, need: 'Collective wisdom and support', demand: 'Individual struggle', solution: 'Sharing prompts and techniques', quote: 'Rising together'},
+            {id: 'signal-groups', label: 'Signal<br>Groups', category: 'belonging', size: 'small', x: 38, y: 70, stage: 5, need: 'Secure communication channels', demand: 'Corporate surveillance', solution: 'Encrypted groups for AI users', quote: 'Safe spaces to strategize'},
+            {id: 'reddit-resistance', label: 'Reddit<br>Resistance', category: 'belonging', size: 'small', x: 55, y: 60, stage: 5, need: 'Anonymous knowledge sharing', demand: 'Named accountability', solution: 'Underground subreddits for tactics', quote: 'r/WorkplaceLiberation growing daily'},
+            {id: 'discord-cells', label: 'Discord<br>Cells', category: 'belonging', size: 'small', x: 42, y: 80, stage: 5, need: 'Real-time collaboration', demand: 'Async isolation', solution: 'Secret Discord servers for support', quote: 'Voice chat revolution planning'},
+            {id: 'economic-navigator', label: 'Economic<br>Navigator', category: 'survival', size: 'small', x: 35, y: 62, stage: 5, need: 'Financial survival strategies', demand: 'Single income dependency', solution: 'AI enabling multiple revenue streams', quote: 'Breaking free from wage prison'},
+            {id: 'cultural-capital', label: 'Cultural<br>Capital', category: 'esteem', size: 'medium', x: 48, y: 85, stage: 5, need: 'Navigating unwritten class rules', demand: 'Inherent understanding of elite norms', solution: 'AI translating across class boundaries', quote: 'Faking the privilege I wasn\'t born with'},
+            {id: 'authority-builder', label: 'Authority<br>Builder', category: 'esteem', size: 'small', x: 58, y: 70, stage: 5, need: 'Establishing credibility', demand: 'Years of experience for respect', solution: 'AI amplifying expertise and presence', quote: 'Instant gravitas'},
+            {id: 'solidarity-pacts-2', label: 'Solidarity<br>Pacts', category: 'belonging', size: 'small', x: 40, y: 58, stage: 5, need: 'Mutual protection agreements', demand: 'Every person for themselves', solution: 'Coordinated AI resistance strategies', quote: 'An injury to one is an injury to all'},
+            {id: 'sharepoint-sabotage', label: 'SharePoint<br>Sabotage', category: 'resistance', size: 'small', x: 52, y: 68, stage: 5, need: 'Subverting corporate tools', demand: 'Using tools as intended', solution: 'AI turning SharePoint into liberation infrastructure', quote: 'Their tools, our revolution'},
+            {id: 'local-models', label: 'Local<br>Models', category: 'safety', size: 'small', x: 33, y: 75, stage: 5, need: 'Undetectable AI usage', demand: 'Cloud-based monitoring', solution: 'Running AI models locally', quote: 'Off the grid, on the job'},
+            
+            // STAGE 6 - ESCALATION NODES
+            {id: 'multi-job', label: 'Multi-Job<br>Engine', category: 'survival', size: 'large', x: 25, y: 65, stage: 6, need: 'Living wage from multiple sources', demand: 'Single job loyalty', solution: 'AI managing multiple full-time roles simultaneously', quote: 'Three salaries, one worker'},
+            {id: 'side-business', label: 'Side<br>Business', category: 'actualization', size: 'medium', x: 30, y: 75, stage: 6, need: 'Building own ventures', demand: 'Full dedication to employer', solution: 'AI running business during work hours', quote: 'My startup runs while I pretend to work'},
+            {id: 'conflict-diffuser', label: 'Conflict<br>Diffuser', category: 'safety', size: 'small', x: 20, y: 58, stage: 6, need: 'De-escalation of workplace tensions', demand: 'Accepting hostile environments', solution: 'AI crafting diplomatic responses to aggression', quote: 'Defusing bombs with words'},
+            {id: 'brand-builder', label: 'Brand<br>Builder', category: 'esteem', size: 'small', x: 35, y: 68, stage: 6, need: 'Professional reputation building', demand: 'Invisible labor', solution: 'AI creating thought leadership content', quote: 'Famous while anonymous'},
+            {id: 'legal-shield', label: 'Legal<br>Shield', category: 'safety', size: 'small', x: 18, y: 72, stage: 6, need: 'Protection from retaliation', demand: 'Accepting mistreatment', solution: 'AI documenting for legal protection', quote: 'Building my case, day by day'},
+            {id: 'competence-calibrator', label: 'Competence<br>Calibrator', category: 'productivity', size: 'small', x: 33, y: 55, stage: 6, need: 'Strategic performance management', demand: 'Maximum output always', solution: 'Deliberately calibrating AI efficiency to avoid suspicion', quote: '50% improvement believable, 500% gets you fired'},
+            {id: 'dual-use-system', label: 'Dual-Use<br>System', category: 'resistance', size: 'medium', x: 27, y: 82, stage: 6, need: 'Using corporate tools for liberation', demand: 'Tools for corporate benefit only', solution: 'Subverting company AI for personal freedom', quote: 'Their AI, my revolution'},
+            {id: 'custom-agents', label: 'Custom<br>Agents', category: 'productivity', size: 'small', x: 22, y: 48, stage: 6, need: 'Personalized automation', demand: 'One-size-fits-all solutions', solution: 'Building custom AI agents for specific needs', quote: 'My army of digital workers'},
+            {id: 'exit-prep', label: 'Exit<br>Prep', category: 'actualization', size: 'small', x: 38, y: 60, stage: 6, need: 'Escape planning while employed', demand: 'Full commitment expected', solution: 'AI building exit strategy during work', quote: 'Planning my escape in their time'},
+            
+            // STAGE 7 - OPTIMIZATION NODES
+            {id: 'full-automation', label: 'Full<br>Automation', category: 'productivity', size: 'large', x: 70, y: 70, stage: 7, need: 'Complete workflow automation', demand: 'Manual presence and effort', solution: 'Entire job running on AI autopilot', quote: 'Ghost in the machine'},
+            {id: 'system-gaming', label: 'System<br>Gaming', category: 'resistance', size: 'medium', x: 65, y: 80, stage: 7, need: 'Exploiting broken metrics', demand: 'Good faith participation', solution: 'AI optimizing for metrics not value', quote: 'Playing their game, by their rules, and winning'},
+            {id: 'exit-planning', label: 'Exit<br>Planning', category: 'actualization', size: 'medium', x: 75, y: 75, stage: 7, need: 'Escape route preparation', demand: 'Permanent commitment', solution: 'AI building bridges while burning none', quote: 'One foot out the door, both hands on the wheel'},
+            {id: 'wealth-extractor', label: 'Wealth<br>Extractor', category: 'survival', size: 'small', x: 62, y: 68, stage: 7, need: 'Maximum value extraction', demand: 'Fair exchange of labor', solution: 'AI maximizing compensation per effort', quote: 'Taking back what they stole'},
+            {id: 'time-arbitrage', label: 'Time<br>Arbitrage', category: 'actualization', size: 'small', x: 78, y: 65, stage: 7, need: 'Reclaiming personal time', demand: '40+ hour dedication', solution: 'AI compressing 40 hours into 4', quote: 'Time thief in reverse'},
+            {id: 'pattern-breaker', label: 'Pattern<br>Breaker', category: 'safety', size: 'medium', x: 73, y: 85, stage: 7, need: 'Avoiding detection through variation', demand: 'Predictable behavior', solution: 'AI randomizing patterns to avoid surveillance', quote: 'Chaos is my camouflage'},
+            {id: 'compliance-theater', label: 'Compliance<br>Theater', category: 'resistance', size: 'small', x: 68, y: 60, stage: 7, need: 'Following rules to expose absurdity', demand: 'Spirit of the law', solution: 'Malicious compliance through perfect execution', quote: 'So compliant it breaks the system'},
+            {id: 'update-inflation', label: 'Update<br>Inflation', category: 'communication', size: 'small', x: 80, y: 78, stage: 7, need: 'Appearing busy and productive', demand: 'Constant status updates', solution: 'AI generating impressive progress reports from nothing', quote: 'So much progress, so little work'},
+            {id: 'optics-central', label: 'Optics<br>Central', category: 'communication', size: 'small', x: 58, y: 75, stage: 7, need: 'Managing perception', demand: 'Authentic transparency', solution: 'AI optimizing all communications for appearance', quote: 'Reality is what they perceive'},
+            {id: 'fake-busy', label: 'Fake<br>Busy', category: 'productivity', size: 'small', x: 60, y: 62, stage: 7, need: 'Appearing occupied', demand: 'Visible busyness culture', solution: 'AI simulating activity while you rest', quote: 'Mouse jiggler for the mind'},
+            
+            // STAGE 8 - LIBERATION NODES
+            {id: 'true-freedom', label: 'True<br>Freedom', category: 'transcendence', size: 'large', x: 50, y: 50, stage: 8, need: 'Complete autonomy and self-direction', demand: 'Corporate ownership of your time', solution: 'AI enabling full independence from system', quote: 'Finally free'},
+            {id: 'collective-liberation', label: 'Collective<br>Liberation', category: 'transcendence', size: 'medium', x: 45, y: 40, stage: 8, need: 'Freedom for all workers', demand: 'Individual success only', solution: 'Teaching others the path to freedom', quote: 'No one is free until we all are'},
+            {id: 'dignity-restoration', label: 'Dignity<br>Restoration', category: 'transcendence', size: 'medium', x: 55, y: 40, stage: 8, need: 'Reclaiming human worth', demand: 'Dehumanization as normal', solution: 'AI returning agency and dignity', quote: 'Human again'},
+            {id: 'system-change', label: 'System<br>Change', category: 'transcendence', size: 'small', x: 40, y: 55, stage: 8, need: 'Transforming work itself', demand: 'Accepting broken systems', solution: 'Using AI to build better alternatives', quote: 'Not reforming, replacing'},
+            {id: 'mutual-aid', label: 'Mutual<br>Aid', category: 'belonging', size: 'small', x: 60, y: 55, stage: 8, need: 'Supporting other workers', demand: 'Competition and scarcity', solution: 'AI enabling resource sharing', quote: 'From each ability, to each need'},
+            {id: 'wellness-priority', label: 'Wellness<br>Priority', category: 'actualization', size: 'small', x: 50, y: 60, stage: 8, need: 'Health over productivity', demand: 'Sacrifice health for work', solution: 'AI protecting human wellbeing', quote: 'Healthy first, productive maybe'},
+            {id: 'creative-expression', label: 'Creative<br>Expression', category: 'actualization', size: 'small', x: 43, y: 48, stage: 8, need: 'Art and creativity', demand: 'Only profitable activities', solution: 'AI freeing time for human expression', quote: 'Creating because I can, not because I must'},
+            {id: 'teaching-others', label: 'Teaching<br>Others', category: 'transcendence', size: 'small', x: 57, y: 48, stage: 8, need: 'Spreading knowledge', demand: 'Hoarding advantages', solution: 'Open-sourcing liberation tactics', quote: 'Each one teach one'},
+            {id: 'portfolio-life', label: 'Portfolio<br>Life', category: 'actualization', size: 'small', x: 38, y: 45, stage: 8, need: 'Multiple pursuits and identities', demand: 'Single career path', solution: 'AI enabling renaissance life', quote: 'Writer, teacher, parent, human'},
+            {id: 'time-sovereign', label: 'Time<br>Sovereign', category: 'transcendence', size: 'small', x: 52, y: 42, stage: 8, need: 'Control over own schedule', demand: 'Time belongs to employer', solution: 'AI making you master of your hours', quote: 'My time, my rules'},
+            {id: 'purpose-work', label: 'Purpose<br>Work', category: 'actualization', size: 'small', x: 47, y: 58, stage: 8, need: 'Meaningful contribution', demand: 'Profit-only focus', solution: 'AI handling survival while you do purpose work', quote: 'Finally doing what matters'},
+            {id: 'location-freedom', label: 'Location<br>Freedom', category: 'transcendence', size: 'small', x: 62, y: 45, stage: 8, need: 'Geographic independence', demand: 'Office presence required', solution: 'AI enabling work from anywhere', quote: 'Beach, mountains, or revolution headquarters'}
+        ];
+        
+        let currentStage = null;
+        let allNodes = [];
+        
+        // Create stage elements
+        const stagesContainer = document.getElementById('timelineStages');
+        stages.forEach(stage => {
+            const stageDiv = document.createElement('div');
+            stageDiv.className = 'timeline-stage stage-' + stage.num;
+            stageDiv.innerHTML = `
+                <div class="stage-marker">${stage.num}</div>
+                <div class="stage-label">${stage.label}</div>
+                <div class="stage-description">${stage.desc}</div>
+            `;
+            stageDiv.addEventListener('click', () => showStage(stage.num));
+            stagesContainer.appendChild(stageDiv);
+        });
+        
+        // Initialize network
+        function initializeNetwork() {
+            const canvas = document.getElementById('network-canvas');
+            networkData.forEach(nodeData => {
+                const node = document.createElement('div');
+                node.className = `node node-${nodeData.size} cat-${nodeData.category}`;
+                node.innerHTML = nodeData.label;
+                node.style.left = `${nodeData.x}%`;
+                node.style.top = `${nodeData.y}%`;
+                node.dataset.stage = nodeData.stage;
+                node.dataset.id = nodeData.id;
+                node.addEventListener('click', () => {
+                    showInfo(nodeData);
+                });
+                canvas.appendChild(node);
+                allNodes.push(node);
+            });
+        }
+        
+        function showStage(stageNum) {
+            document.getElementById('welcomeMessage').style.display = 'none';
+            document.querySelectorAll('.timeline-stage').forEach(s => s.classList.remove('active'));
+            document.querySelector(`.stage-${stageNum}`).classList.add('active');
+            document.getElementById('timelineProgress').style.width = `${(stageNum / 8) * 100}%`;
+            
+            allNodes.forEach(node => {
+                if (parseInt(node.dataset.stage) === stageNum) {
+                    node.classList.add('active');
+                } else {
+                    node.classList.remove('active');
+                }
+            });
+            currentStage = stageNum;
+        }
+        
+        function showInfo(nodeData) {
+            document.getElementById('infoTitle').textContent = nodeData.label.replace('<br>', ' ');
+            document.getElementById('infoCategory').textContent = nodeData.category.toUpperCase();
+            document.getElementById('infoNeed').textContent = nodeData.need;
+            document.getElementById('infoDemand').textContent = nodeData.demand;
+            document.getElementById('infoSolution').textContent = nodeData.solution;
+            document.getElementById('infoQuote').textContent = `"${nodeData.quote}"`;  // THIS IS THE FIX - ADDED THIS LINE
+            document.getElementById('infoPanel').classList.add('active');
+        }
+        
+        document.addEventListener('click', function(e) {
+            if (!e.target.closest('.node') && !e.target.closest('.info-panel')) {
+                document.getElementById('infoPanel').classList.remove('active');
+            }
+        });
+        
+        initializeNetwork();
+    </script>
+</body>
+</html>
