@@ -3,10 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>The Shadow AI Revolution: Worker Journey</title>
+    <title>AI Creativity: Complete Use Case Analysis (120 Cases)</title>
     <style>
-        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
-        
         * {
             margin: 0;
             padding: 0;
@@ -14,713 +12,940 @@
         }
         
         body {
-            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
-            background: #FFFFFF;
-            color: #333;
+            font-family: 'Avenir', 'Avenir Next', -apple-system, BlinkMacSystemFont, sans-serif;
+            background-color: #FFFFFF;
+            color: #121212;
             overflow: hidden;
-            height: 100vh;
         }
         
         .container {
+            width: 100vw;
             height: 100vh;
+            position: relative;
             display: flex;
             flex-direction: column;
-            position: relative;
         }
         
         .header {
-            padding: 20px 32px;
+            padding: 20px 30px;
             border-bottom: 1px solid #E5E5E5;
-            background: #FFFFFF;
+            background: #FAFAFA;
+            z-index: 50;
         }
         
         .header h1 {
-            font-size: 28px;
+            font-size: 24px;
             font-weight: 700;
-            color: #1a1a1a;
-            margin-bottom: 4px;
-            letter-spacing: -0.02em;
-        }
-        
-        .header .subtitle {
-            font-size: 14px;
-            color: #666;
-            margin-bottom: 6px;
-        }
-        
-        .header .source {
-            font-size: 11px;
-            color: #999;
-            font-style: italic;
-        }
-        
-        .journey-timeline {
-            background: #FAFAFA;
-            border-bottom: 1px solid #E5E5E5;
-            padding: 20px 32px;
-        }
-        
-        .timeline-container {
-            position: relative;
-            max-width: 1200px;
-            margin: 0 auto;
-        }
-        
-        .timeline-track {
-            position: absolute;
-            top: 32px;
-            left: 0;
-            right: 0;
-            height: 2px;
-            background: #E5E5E5;
-            z-index: 1;
-        }
-        
-        .timeline-progress {
-            position: absolute;
-            top: 32px;
-            left: 0;
-            height: 2px;
-            background: linear-gradient(90deg, #FF6B6B, #4ECDC4);
-            z-index: 2;
-            transition: width 0.3s ease;
-            width: 0;
-        }
-        
-        .timeline-stages {
-            display: flex;
-            justify-content: space-between;
-            position: relative;
-            z-index: 3;
-        }
-        
-        .timeline-stage {
-            flex: 1;
-            text-align: center;
-            cursor: pointer;
-            transition: all 0.2s ease;
-            padding: 8px 4px;
-        }
-        
-        .stage-marker {
-            width: 36px;
-            height: 36px;
-            margin: 0 auto 8px;
-            border-radius: 50%;
-            background: #FFFFFF;
-            border: 2px solid #E5E5E5;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 14px;
-            font-weight: 600;
-            color: #999;
-            transition: all 0.2s ease;
-        }
-        
-        .timeline-stage:hover .stage-marker {
-            border-color: #666;
-            color: #666;
-            transform: scale(1.1);
-        }
-        
-        .timeline-stage.active .stage-marker {
-            background: #333;
-            border-color: #333;
-            color: #FFFFFF;
-            transform: scale(1.15);
-        }
-        
-        .stage-label {
-            font-size: 12px;
-            font-weight: 600;
-            color: #333;
-            margin-bottom: 2px;
-        }
-        
-        .stage-description {
-            font-size: 10px;
-            color: #999;
-            font-style: italic;
-        }
-        
-        .canvas-area {
-            flex: 1;
-            position: relative;
-            overflow: hidden;
-            background: #FAFAFA;
-            padding-bottom: 40px;
-            padding-top: 20px;
-        }
-        
-        #network-canvas {
-            width: 100%;
-            height: calc(100% - 60px);
-            position: relative;
-        }
-        
-        .node {
-            position: absolute;
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            text-align: center;
-            cursor: pointer;
-            font-size: 10px;
-            font-weight: 500;
-            line-height: 1.15;
-            transition: all 0.3s ease;
-            transform: translate(-50%, -50%);
-            border: 2px solid;
-            background: #FFFFFF;
-            padding: 6px;
-            opacity: 0.25;
-            filter: grayscale(90%);
-            box-shadow: 0 2px 4px rgba(0,0,0,0.05);
-        }
-        
-        .node.active {
-            opacity: 1;
-            filter: grayscale(0%);
-            z-index: 10;
-            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
-        }
-        
-        .node.active:hover {
-            transform: translate(-50%, -50%) scale(1.15);
-            z-index: 100;
-            box-shadow: 0 6px 12px rgba(0,0,0,0.15);
-        }
-        
-        .node-large {
-            width: 90px;
-            height: 90px;
-            font-size: 11px;
-            font-weight: 600;
-        }
-        
-        .node-medium {
-            width: 72px;
-            height: 72px;
-            font-size: 10px;
-        }
-        
-        .node-small {
-            width: 56px;
-            height: 56px;
-            font-size: 9px;
-        }
-        
-        .node-tiny {
-            width: 42px;
-            height: 42px;
-            font-size: 8px;
-        }
-        
-        .cat-survival { 
-            border-color: #DC2626;
-            background: #FEF2F2;
-            color: #991B1B;
-        }
-        .cat-safety { 
-            border-color: #EA580C;
-            background: #FFF7ED;
-            color: #9A3412;
-        }
-        .cat-belonging { 
-            border-color: #F59E0B;
-            background: #FFFBEB;
-            color: #92400E;
-        }
-        .cat-esteem { 
-            border-color: #84CC16;
-            background: #F7FEE7;
-            color: #3F6212;
-        }
-        .cat-actualization { 
-            border-color: #06B6D4;
-            background: #ECFEFF;
-            color: #0E7490;
-        }
-        .cat-transcendence { 
-            border-color: #8B5CF6;
-            background: #F5F3FF;
-            color: #6D28D9;
-        }
-        .cat-productivity { 
-            border-color: #3B82F6;
-            background: #EFF6FF;
-            color: #1D4ED8;
-        }
-        .cat-cognitive { 
-            border-color: #10B981;
-            background: #ECFDF5;
-            color: #059669;
-        }
-        .cat-resistance { 
-            border-color: #EC4899;
-            background: #FDF2F8;
-            color: #BE185D;
-        }
-        .cat-care { 
-            border-color: #14B8A6;
-            background: #F0FDFA;
-            color: #0F766E;
-        }
-        .cat-communication { 
-            border-color: #6366F1;
-            background: #EEF2FF;
-            color: #4338CA;
-        }
-        .cat-discrimination { 
-            border-color: #EF4444;
-            background: #FEF2F2;
-            color: #B91C1C;
-        }
-        
-        .welcome-message {
-            position: absolute;
-            top: 24px;
-            left: 24px;
-            background: #FFFFFF;
-            border: 1px solid #E5E5E5;
-            border-radius: 4px;
-            padding: 16px 20px;
-            max-width: 320px;
-            z-index: 100;
-            box-shadow: 0 2px 8px rgba(0,0,0,0.05);
-        }
-        
-        .welcome-title {
-            font-size: 14px;
-            font-weight: 600;
-            color: #1a1a1a;
+            color: #121212;
             margin-bottom: 8px;
         }
         
-        .welcome-text {
+        .header p {
+            font-size: 14px;
+            color: #707070;
+            font-weight: 400;
+        }
+        
+        .filter-controls {
+            display: flex;
+            gap: 8px;
+            align-items: center;
+            margin-top: 12px;
+            padding: 8px 0;
+        }
+        
+        .filter-controls h4 {
             font-size: 12px;
-            color: #666;
+            font-weight: 700;
+            margin: 0;
+            margin-right: 8px;
+            color: #121212;
+        }
+        
+        .filter-button {
+            padding: 6px 12px;
+            margin: 0 2px;
+            background: #F5F5F5;
+            border: 1px solid #E5E5E5;
+            border-radius: 4px;
+            font-size: 11px;
+            cursor: pointer;
+            transition: all 0.2s ease;
+        }
+        
+        .filter-button:hover {
+            background: #E5E5E5;
+        }
+        
+        .filter-button.active {
+            background: #C70000;
+            color: white;
+            border-color: #C70000;
+        }
+        
+        .chart-container {
+            flex: 1;
+            position: relative;
+            background: #FFFFFF;
+        }
+        
+        .chart-area {
+            width: 100%;
+            height: 100%;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .axis-labels {
+            position: absolute;
+            font-family: 'Avenir', sans-serif;
+            font-size: 14px;
+            font-weight: 600;
+            color: #121212;
+            z-index: 10;
+        }
+        
+        .x-axis-left {
+            bottom: 160px;
+            left: 80px;
+            text-align: center;
+        }
+        
+        .x-axis-right {
+            bottom: 160px;
+            right: 80px;
+            text-align: center;
+        }
+        
+        .y-axis-bottom {
+            bottom: 50%;
+            left: 20px;
+            transform: rotate(-90deg);
+            transform-origin: center;
+        }
+        
+        .y-axis-top {
+            top: 50%;
+            left: 20px;
+            transform: rotate(-90deg);
+            transform-origin: center;
+        }
+        
+        .quadrant-labels {
+            position: absolute;
+            font-family: 'Avenir', sans-serif;
+            font-size: 12px;
+            font-weight: 500;
+            color: #707070;
+            text-align: center;
+            z-index: 5;
+        }
+        
+        .quadrant-1 {
+            top: 20px;
+            right: 20px;
+            width: 200px;
+        }
+        
+        .quadrant-2 {
+            top: 20px;
+            left: 80px;
+            width: 200px;
+        }
+        
+        .quadrant-3 {
+            bottom: 200px;
+            left: 80px;
+            width: 200px;
+        }
+        
+        .quadrant-4 {
+            bottom: 200px;
+            right: 20px;
+            width: 200px;
+        }
+        
+        .grid-lines {
+            position: absolute;
+            top: 50px;
+            left: 60px;
+            right: 60px;
+            bottom: 170px;
+            z-index: 1;
+        }
+        
+        .grid-line-v {
+            position: absolute;
+            top: 0;
+            bottom: 0;
+            left: 50%;
+            width: 1px;
+            background: #E5E5E5;
+        }
+        
+        .grid-line-h {
+            position: absolute;
+            left: 0;
+            right: 0;
+            top: 50%;
+            height: 1px;
+            background: #E5E5E5;
+        }
+        
+        .plot-area {
+            position: absolute;
+            top: 50px;
+            left: 60px;
+            right: 60px;
+            bottom: 170px;
+            z-index: 20;
+        }
+        
+        .bubble {
+            position: absolute;
+            border-radius: 50%;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            border: 2px solid rgba(255, 255, 255, 0.8);
+            opacity: 0.85;
+        }
+        
+        .bubble:hover {
+            transform: scale(1.2) translate(0px, -5px);
+            opacity: 1;
+            z-index: 100;
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.3);
+        }
+        
+        .bubble.selected {
+            transform: scale(1.3) translate(0px, -8px);
+            opacity: 1;
+            z-index: 200;
+            box-shadow: 0 10px 35px rgba(0, 0, 0, 0.4);
+            border-color: #121212;
+            border-width: 3px;
+        }
+        
+        /* Positive Cluster Colors */
+        .cluster-survival { background: #C70000; }
+        .cluster-accessibility { background: #0077B6; }
+        .cluster-content { background: #00865A; }
+        .cluster-visual { background: #B39DDB; }
+        .cluster-authenticity { background: #951B81; }
+        .cluster-therapeutic { background: #FF1493; }
+        .cluster-education { background: #6750A4; }
+        .cluster-collaboration { background: #FFB300; }
+        .cluster-hybrid { background: #00BCD4; }
+        .cluster-music { background: #689F38; }
+        .cluster-professional { background: #26A69A; }
+        .cluster-research { background: #607D8B; }
+        .cluster-entertainment { background: #FF5722; }
+        
+        /* Harmful Cluster Colors */
+        .cluster-academic-deception { background: #121212; }
+        .cluster-copyright-violation { background: #8B0000; }
+        .cluster-gender-exploitation { background: #8B4513; }
+        .cluster-economic-warfare { background: #B22222; }
+        .cluster-cultural-appropriation { background: #2F4F4F; }
+        .cluster-surveillance { background: #556B2F; }
+        .cluster-addiction { background: #000000; }
+        
+        .info-panel {
+            position: absolute;
+            top: 20px;
+            left: 20px;
+            background: #FFFFFF;
+            border: 1px solid #E5E5E5;
+            border-radius: 6px;
+            padding: 20px;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
+            z-index: 300;
+            display: none;
+            max-width: 400px;
+            font-family: 'Avenir', sans-serif;
+        }
+        
+        .info-panel.harmful {
+            border-color: #C70000;
+            border-width: 2px;
+        }
+        
+        .info-panel h3 {
+            font-size: 16px;
+            font-weight: 700;
+            color: #121212;
+            margin-bottom: 8px;
+        }
+        
+        .info-panel.harmful h3 {
+            color: #C70000;
+        }
+        
+        .info-panel .cluster {
+            font-size: 12px;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            margin-bottom: 8px;
+        }
+        
+        .info-panel .mantra {
+            font-size: 14px;
+            font-style: italic;
+            color: #C70000;
+            line-height: 1.4;
+            margin-bottom: 12px;
+            font-weight: 500;
+        }
+        
+        .info-panel .description {
+            font-size: 13px;
+            color: #545454;
             line-height: 1.5;
+            margin-bottom: 12px;
+        }
+        
+        .info-panel .harm-warning {
+            background: #FFF5F5;
+            border-left: 4px solid #C70000;
+            padding: 12px;
+            margin-bottom: 12px;
+            font-size: 12px;
+            color: #8B0000;
+            display: none;
+        }
+        
+        .info-panel.harmful .harm-warning {
+            display: block;
+        }
+        
+        .info-panel .stats {
+            display: flex;
+            gap: 16px;
+            font-size: 12px;
+            color: #707070;
+        }
+        
+        .close-button {
+            position: absolute;
+            top: 12px;
+            right: 12px;
+            background: none;
+            border: none;
+            font-size: 18px;
+            cursor: pointer;
+            color: #707070;
+            padding: 4px;
+        }
+        
+        .close-button:hover {
+            color: #121212;
         }
         
         .legend {
             position: absolute;
-            bottom: 0;
-            left: 0;
-            right: 0;
+            bottom: 10px;
+            left: 20px;
+            right: 20px;
             background: #FFFFFF;
-            border-top: 1px solid #E5E5E5;
-            padding: 12px 32px;
-            z-index: 100;
+            border: 1px solid #E5E5E5;
+            border-radius: 6px;
+            padding: 16px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            z-index: 30;
+            height: 140px;
+            overflow-y: auto;
         }
         
-        .legend-title {
-            font-size: 10px;
+        .legend h4 {
+            font-size: 12px;
+            font-weight: 700;
             text-transform: uppercase;
             letter-spacing: 0.5px;
-            color: #999;
-            margin-bottom: 10px;
-            font-weight: 600;
-            text-align: center;
+            color: #707070;
+            margin-bottom: 12px;
         }
         
-        .legend-items {
-            display: grid;
-            grid-template-columns: repeat(6, 1fr);
-            grid-template-rows: repeat(2, 1fr);
-            gap: 8px 16px;
-            max-width: 1200px;
-            margin: 0 auto;
+        .legend-section {
+            margin-bottom: 12px;
+        }
+        
+        .legend-section h5 {
+            font-size: 10px;
+            font-weight: 600;
+            color: #C70000;
+            margin-bottom: 6px;
+            text-transform: uppercase;
         }
         
         .legend-item {
             display: flex;
             align-items: center;
-            font-size: 11px;
-            color: #666;
-            justify-content: center;
+            margin-bottom: 4px;
+            font-size: 10px;
+            color: #121212;
         }
         
         .legend-color {
-            width: 12px;
-            height: 12px;
+            width: 10px;
+            height: 10px;
             border-radius: 50%;
             margin-right: 6px;
-            border: 2px solid;
-            flex-shrink: 0;
+            border: 1px solid rgba(255, 255, 255, 0.8);
         }
         
-        .info-panel {
+        .case-count {
             position: absolute;
-            bottom: 24px;
-            right: 24px;
-            width: 420px;
-            background: #FFFFFF;
-            border: 1px solid #E5E5E5;
-            border-radius: 4px;
-            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
-            display: none;
-            z-index: 1000;
-        }
-        
-        .info-panel.active {
-            display: block;
-        }
-        
-        .info-header {
-            padding: 16px 20px;
-            border-bottom: 1px solid #E5E5E5;
-            background: #FAFAFA;
-        }
-        
-        .info-title {
-            font-size: 18px;
+            top: 20px;
+            right: 250px;
+            background: #F5F5F5;
+            padding: 10px 15px;
+            border-radius: 6px;
+            font-size: 14px;
             font-weight: 600;
-            color: #1a1a1a;
-            margin-bottom: 4px;
-        }
-        
-        .info-category {
-            font-size: 11px;
-            text-transform: uppercase;
-            letter-spacing: 0.5px;
-            color: #666;
-        }
-        
-        .info-body {
-            padding: 20px;
-        }
-        
-        .info-section {
-            margin-bottom: 18px;
-        }
-        
-        .info-section:last-child {
-            margin-bottom: 0;
-        }
-        
-        .info-label {
-            font-size: 10px;
-            text-transform: uppercase;
-            letter-spacing: 0.5px;
-            color: #999;
-            margin-bottom: 6px;
-            font-weight: 600;
-        }
-        
-        .info-content {
-            font-size: 13px;
-            color: #333;
-            line-height: 1.5;
-        }
-        
-        .info-quote {
-            padding: 12px 20px;
-            background: #F8F9FA;
-            border-left: 3px solid #667eea;
-            font-style: italic;
-            font-size: 12px;
-            color: #666;
+            color: #121212;
+            z-index: 40;
         }
     </style>
 </head>
 <body>
     <div class="container">
         <div class="header">
-            <h1>The Shadow AI Revolution</h1>
-            <div class="subtitle">Click each stage to explore how workplace AI adoption emerges and evolves over time</div>
-            <div class="source">Source: Analysis of 50,000+ anonymous worker testimonials across Reddit, Discord, and other underground communities</div>
-        </div>
-        
-        <div class="journey-timeline">
-            <div class="timeline-container">
-                <div class="timeline-track"></div>
-                <div class="timeline-progress" id="timelineProgress"></div>
-                <div class="timeline-stages" id="timelineStages"></div>
+            <h1>The Underground AI Creativity Revolution: What People Actually Do When No One's Watching</h1>
+            <p>While the industry debates ethics in boardrooms, millions are already using AI to survive, create, and break free. We mapped all 120 ways—from desperate freelancers to accessibility warriors to outright exploitation. Here's the real story of who's winning and losing in the shadow economy.</p>
+            
+            <div class="filter-controls">
+                <h4>View Filter:</h4>
+                <button class="filter-button active" onclick="filterClusters('positive')" id="positive-btn">Positive Only (100)</button>
+                <button class="filter-button" onclick="filterClusters('all')" id="all-btn">Show All (120)</button>
+                <button class="filter-button" onclick="filterClusters('harmful')" id="harmful-btn">Harmful Only (20)</button>
             </div>
         </div>
         
-        <div class="canvas-area">
-            <div id="network-canvas"></div>
-            
-            <div class="welcome-message" id="welcomeMessage">
-                <div class="welcome-title">Your Journey Through Resistance</div>
-                <div class="welcome-text">
-                    Every node represents a tactic used by thousands of workers right now. 
-                    Click the timeline stages above to see which strategies emerge at each point. 
-                    You're not alone - you're part of a movement.
+        <div class="chart-container">
+            <div class="chart-area">
+                <!-- Quadrant Labels -->
+                <div class="quadrant-labels quadrant-1">
+                    <strong>Creative Revolution</strong><br>
+                    Aspirational + Breaking From Systems
                 </div>
-            </div>
-            
-            <div class="legend">
-                <div class="legend-title">Types of Human Needs</div>
-                <div class="legend-items">
-                    <div class="legend-item">
-                        <div class="legend-color" style="background: #FEF2F2; border-color: #DC2626;"></div>
-                        <span>Survival</span>
+                <div class="quadrant-labels quadrant-2">
+                    <strong>Survival Rebellion</strong><br>
+                    Survival + Breaking From Systems
+                </div>
+                <div class="quadrant-labels quadrant-3">
+                    <strong>Desperate Compliance</strong><br>
+                    Survival + Working Within Systems
+                </div>
+                <div class="quadrant-labels quadrant-4">
+                    <strong>Institutional Innovation</strong><br>
+                    Aspirational + Working Within Systems
+                </div>
+                
+                <!-- Grid Lines -->
+                <div class="grid-lines">
+                    <div class="grid-line-v"></div>
+                    <div class="grid-line-h"></div>
+                </div>
+                
+                <!-- Plot Area -->
+                <div class="plot-area" id="plotArea"></div>
+                
+                <!-- Archetype Labels - Positive Only -->
+                <div class="archetype-labels" id="positiveArchetypes" style="display: block;">
+                    <div class="archetype-label strategic-survivor" style="position: absolute; left: 5%; bottom: 45%; font-size: 11px; font-weight: 600; color: #C70000; background: rgba(255,255,255,0.9); padding: 4px 8px; border-radius: 4px; box-shadow: 0 2px 8px rgba(0,0,0,0.15);">
+                        Strategic Survivor
                     </div>
-                    <div class="legend-item">
-                        <div class="legend-color" style="background: #FEF2F2; border-color: #EF4444;"></div>
-                        <span>Anti-Discrimination</span>
+                    <div class="archetype-label barrier-breaker" style="position: absolute; left: 35%; top: 5%; font-size: 11px; font-weight: 600; color: #0077B6; background: rgba(255,255,255,0.9); padding: 4px 8px; border-radius: 4px; box-shadow: 0 2px 8px rgba(0,0,0,0.15);">
+                        Barrier Breaker
                     </div>
-                    <div class="legend-item">
-                        <div class="legend-color" style="background: #FFF7ED; border-color: #EA580C;"></div>
-                        <span>Safety</span>
+                    <div class="archetype-label creative-revolutionary" style="position: absolute; right: 5%; top: 25%; font-size: 11px; font-weight: 600; color: #951B81; background: rgba(255,255,255,0.9); padding: 4px 8px; border-radius: 4px; box-shadow: 0 2px 8px rgba(0,0,0,0.15);">
+                        Creative Revolutionary
                     </div>
-                    <div class="legend-item">
-                        <div class="legend-color" style="background: #FFFBEB; border-color: #F59E0B;"></div>
-                        <span>Belonging</span>
+                    <div class="archetype-label insider-innovator" style="position: absolute; right: 5%; bottom: 45%; font-size: 11px; font-weight: 600; color: #26A69A; background: rgba(255,255,255,0.9); padding: 4px 8px; border-radius: 4px; box-shadow: 0 2px 8px rgba(0,0,0,0.15);">
+                        Insider Innovator
                     </div>
-                    <div class="legend-item">
-                        <div class="legend-color" style="background: #F7FEE7; border-color: #84CC16;"></div>
-                        <span>Esteem</span>
+                    <div class="archetype-label augmented-artisan" style="position: absolute; right: 25%; top: 5%; font-size: 11px; font-weight: 600; color: #689F38; background: rgba(255,255,255,0.9); padding: 4px 8px; border-radius: 4px; box-shadow: 0 2px 8px rgba(0,0,0,0.15);">
+                        Augmented Artisan
                     </div>
-                    <div class="legend-item">
-                        <div class="legend-color" style="background: #ECFDF5; border-color: #10B981;"></div>
-                        <span>Cognitive Support</span>
-                    </div>
-                    <div class="legend-item">
-                        <div class="legend-color" style="background: #F0FDFA; border-color: #14B8A6;"></div>
-                        <span>Care Work</span>
-                    </div>
-                    <div class="legend-item">
-                        <div class="legend-color" style="background: #ECFEFF; border-color: #06B6D4;"></div>
-                        <span>Self-Actualization</span>
-                    </div>
-                    <div class="legend-item">
-                        <div class="legend-color" style="background: #EFF6FF; border-color: #3B82F6;"></div>
-                        <span>Productivity</span>
-                    </div>
-                    <div class="legend-item">
-                        <div class="legend-color" style="background: #EEF2FF; border-color: #6366F1;"></div>
-                        <span>Communication</span>
-                    </div>
-                    <div class="legend-item">
-                        <div class="legend-color" style="background: #F5F3FF; border-color: #8B5CF6;"></div>
-                        <span>Transcendence</span>
-                    </div>
-                    <div class="legend-item">
-                        <div class="legend-color" style="background: #FDF2F8; border-color: #EC4899;"></div>
-                        <span>Resistance</span>
+                </div>
+                
+                <!-- Archetype Labels - Harmful Only -->
+                <div class="archetype-labels" id="harmfulArchetypes" style="display: none;">
+                    <div class="archetype-label digital-deceiver" style="position: absolute; left: 35%; bottom: 45%; font-size: 11px; font-weight: 600; color: #FFFFFF; background: rgba(18,18,18,0.9); padding: 4px 8px; border-radius: 4px; box-shadow: 0 2px 8px rgba(0,0,0,0.3);">
+                        Digital Deceiver
                     </div>
                 </div>
             </div>
+        </div>
+        
+        <!-- Legend -->
+        <div class="legend">
+            <h4>All 120 Use Cases</h4>
             
-            <div class="info-panel" id="infoPanel">
-                <div class="info-header">
-                    <div class="info-title" id="infoTitle">-</div>
-                    <div class="info-category" id="infoCategory">-</div>
+            <div class="legend-section" style="display: flex; flex-wrap: wrap; gap: 16px;">
+                <div style="flex: 1; min-width: 250px;">
+                    <h5>Positive Applications (100 total)</h5>
+                    <div style="display: flex; flex-wrap: wrap; gap: 8px;">
+                        <div class="legend-item">
+                            <div class="legend-color cluster-content"></div>
+                            <span>Writing & Content</span>
+                        </div>
+                        <div class="legend-item">
+                            <div class="legend-color cluster-visual"></div>
+                            <span>Visual Arts</span>
+                        </div>
+                        <div class="legend-item">
+                            <div class="legend-color cluster-survival"></div>
+                            <span>Economic Survival</span>
+                        </div>
+                        <div class="legend-item">
+                            <div class="legend-color cluster-accessibility"></div>
+                            <span>Accessibility</span>
+                        </div>
+                        <div class="legend-item">
+                            <div class="legend-color cluster-professional"></div>
+                            <span>Professional</span>
+                        </div>
+                        <div class="legend-item">
+                            <div class="legend-color cluster-education"></div>
+                            <span>Educational</span>
+                        </div>
+                        <div class="legend-item">
+                            <div class="legend-color cluster-entertainment"></div>
+                            <span>Entertainment</span>
+                        </div>
+                        <div class="legend-item">
+                            <div class="legend-color cluster-music"></div>
+                            <span>Music & Audio</span>
+                        </div>
+                        <div class="legend-item">
+                            <div class="legend-color cluster-therapeutic"></div>
+                            <span>Therapeutic</span>
+                        </div>
+                        <div class="legend-item">
+                            <div class="legend-color cluster-collaboration"></div>
+                            <span>Creative Partnership</span>
+                        </div>
+                        <div class="legend-item">
+                            <div class="legend-color cluster-authenticity"></div>
+                            <span>Authenticity Movement</span>
+                        </div>
+                        <div class="legend-item">
+                            <div class="legend-color cluster-research"></div>
+                            <span>Research & Innovation</span>
+                        </div>
+                        <div class="legend-item">
+                            <div class="legend-color cluster-hybrid"></div>
+                            <span>Techno-Craftisan</span>
+                        </div>
+                    </div>
                 </div>
-                <div class="info-body">
-                    <div class="info-section">
-                        <div class="info-label">What Humans Need</div>
-                        <div class="info-content" id="infoNeed">-</div>
-                    </div>
-                    <div class="info-section">
-                        <div class="info-label">What The System Demands</div>
-                        <div class="info-content" id="infoDemand">-</div>
-                    </div>
-                    <div class="info-section">
-                        <div class="info-label">How Shadow AI Bridges The Gap</div>
-                        <div class="info-content" id="infoSolution">-</div>
+                
+                <div style="flex: 1; min-width: 200px;">
+                    <h5>Harmful Applications (20 total)</h5>
+                    <div style="display: flex; flex-wrap: wrap; gap: 8px;">
+                        <div class="legend-item">
+                            <div class="legend-color cluster-academic-deception"></div>
+                            <span>Academic Deception</span>
+                        </div>
+                        <div class="legend-item">
+                            <div class="legend-color cluster-copyright-violation"></div>
+                            <span>Copyright Violation</span>
+                        </div>
+                        <div class="legend-item">
+                            <div class="legend-color cluster-gender-exploitation"></div>
+                            <span>Gender Exploitation</span>
+                        </div>
+                        <div class="legend-item">
+                            <div class="legend-color cluster-economic-warfare"></div>
+                            <span>Economic Warfare</span>
+                        </div>
+                        <div class="legend-item">
+                            <div class="legend-color cluster-cultural-appropriation"></div>
+                            <span>Cultural Appropriation</span>
+                        </div>
+                        <div class="legend-item">
+                            <div class="legend-color cluster-surveillance"></div>
+                            <span>Surveillance</span>
+                        </div>
+                        <div class="legend-item">
+                            <div class="legend-color cluster-addiction"></div>
+                            <span>Addiction/Dependency</span>
+                        </div>
                     </div>
                 </div>
-                <div class="info-quote" id="infoQuote"></div>
+            </div>
+        </div>
+        
+        <!-- Info Panel -->
+        <div class="info-panel" id="infoPanel">
+            <button class="close-button" onclick="closeInfoPanel()">×</button>
+            <h3 id="infoTitle"></h3>
+            <div class="cluster" id="infoCluster"></div>
+            <div class="mantra" id="infoMantra"></div>
+            <div class="description" id="infoDescription"></div>
+            <div class="harm-warning" id="infoHarm"></div>
+            <div class="stats">
+                <span>Position: <strong id="infoPosition"></strong></span>
             </div>
         </div>
     </div>
     
     <script>
-        const stages = [
-            { num: 1, label: 'Crisis', desc: '"I can\'t survive"' },
-            { num: 2, label: 'Discovery', desc: '"AI can help"' },
-            { num: 3, label: 'Experimentation', desc: '"Testing limits"' },
-            { num: 4, label: 'Concealment', desc: '"Going dark"' },
-            { num: 5, label: 'Network', desc: '"Finding others"' },
-            { num: 6, label: 'Escalation', desc: '"Multiple streams"' },
-            { num: 7, label: 'Optimization', desc: '"Full automation"' },
-            { num: 8, label: 'Liberation', desc: '"True freedom"' }
+        const allUseCases = [
+            // === ECONOMIC SURVIVAL CLUSTER (14 total) ===
+            { name: 'Freelancer Survival Economy', cluster: 'survival', x: 12, y: 28, prevalence: 87, mantra: 'AI keeps me competitive when clients expect impossible deadlines', description: 'Essential workflow acceleration enabling freelancers to maintain quality while meeting AI-accelerated market expectations and competitive pricing.', harmful: false },
+            { name: 'Gig Economy Multiplier', cluster: 'survival', x: 18, y: 32, prevalence: 78, mantra: 'Taking on 3x more projects to pay rent', description: 'Using AI to dramatically increase project throughput while maintaining baseline quality standards in increasingly competitive markets.', harmful: false },
+            { name: 'Small Business Brand Builder', cluster: 'survival', x: 15, y: 25, prevalence: 85, mantra: 'Professional marketing on a bootstrap budget', description: 'Small businesses creating enterprise-level marketing materials without hiring agencies or in-house creative teams.', harmful: false },
+            { name: 'Freelance Proposal Generator', cluster: 'survival', x: 22, y: 30, prevalence: 81, mantra: 'Winning proposals that pay the bills', description: 'Freelance proposal creation optimized for client needs and competitive pricing.', harmful: false },
+            { name: 'Portfolio Website Builder', cluster: 'survival', x: 10, y: 22, prevalence: 77, mantra: 'Professional presence on zero budget', description: 'Portfolio website creation for creative professionals without technical skills.', harmful: false },
+            { name: 'Client Communication Helper', cluster: 'survival', x: 25, y: 26, prevalence: 73, mantra: 'Clear communication saves relationships', description: 'Professional client communication assistance for freelancers and creative businesses.', harmful: false },
+            { name: 'Global South Creator Leapfrogging', cluster: 'survival', x: 18, y: 85, prevalence: 92, mantra: 'Building massive audiences while agencies lose clients', description: 'Creators bypass Western creative gatekeepers entirely, building direct global audiences through AI-enabled content production.', harmful: false },
+            { name: 'Invoice and Contract Creator', cluster: 'survival', x: 20, y: 35, prevalence: 69, mantra: 'Getting paid fairly and on time', description: 'Professional contract and invoice generation protecting creative workers\' interests.', harmful: false },
+            { name: 'Skill Gap Identifier', cluster: 'survival', x: 16, y: 38, prevalence: 65, mantra: 'Learning what clients actually want', description: 'Market analysis for creative skills development and career planning.', harmful: false },
+            { name: 'Remote Work Optimizer', cluster: 'survival', x: 8, y: 35, prevalence: 74, mantra: 'Productivity from anywhere', description: 'Digital workspace optimization for remote creative professionals and distributed teams.', harmful: false },
+            { name: 'Pricing Strategy Calculator', cluster: 'survival', x: 14, y: 42, prevalence: 66, mantra: 'Knowing my worth in the market', description: 'AI-driven pricing analysis for creative services based on market rates and skill level.', harmful: false },
+            { name: 'Networking Opportunity Finder', cluster: 'survival', x: 28, y: 32, prevalence: 62, mantra: 'Finding the right connections', description: 'Professional networking assistance identifying relevant contacts and collaboration opportunities.', harmful: false },
+            { name: 'Competition Response System', cluster: 'survival', x: 30, y: 28, prevalence: 64, mantra: 'Staying competitive in AI-accelerated markets', description: 'Freelancers adapting to client expectations set by AI-assisted competitors.', harmful: false },
+            { name: 'Rapid Prototype Creator', cluster: 'survival', x: 26, y: 35, prevalence: 61, mantra: 'Ideas to market in days not months', description: 'Small business rapid prototyping for market testing and investor presentations.', harmful: false },
+            
+            // === ACCESSIBILITY CLUSTER (14 total) ===
+            { name: 'Economic Barrier Destroyer', cluster: 'accessibility', x: 8, y: 75, prevalence: 89, mantra: 'Professional tools without professional prices', description: 'Access to sophisticated creative capabilities without expensive software, training, or equipment investments.', harmful: false },
+            { name: 'Voice Restoration Technology', cluster: 'accessibility', x: 15, y: 78, prevalence: 84, mantra: 'AI returned what illness had taken from me', description: 'Voice artists with damaged vocal cords, cancer survivors, and people with speech disabilities recreating their original sound through AI voice synthesis.', harmful: false },
+            { name: 'ADHD Executive Brain', cluster: 'accessibility', x: 12, y: 82, prevalence: 78, mantra: 'My external brain when mine won\'t cooperate', description: 'Comprehensive executive function support including task management, deadline tracking, and attention regulation for neurodivergent creators.', harmful: false },
+            { name: 'Dyslexia Reading Assistant', cluster: 'accessibility', x: 18, y: 75, prevalence: 76, mantra: 'Words that finally make sense', description: 'AI-powered reading assistance for dyslexic users with personalized text processing and comprehension support.', harmful: false },
+            { name: 'Cognitive Disability Helper', cluster: 'accessibility', x: 22, y: 78, prevalence: 74, mantra: 'Thinking support when needed', description: 'Cognitive assistance tools for people with intellectual disabilities to express creativity and communicate ideas.', harmful: false },
+            { name: 'Motor Disability Canvas', cluster: 'accessibility', x: 10, y: 88, prevalence: 72, mantra: 'Creating art when my hands can\'t hold a brush', description: 'Artists with motor disabilities, arthritis, or hand injuries continuing creative practice through voice-controlled AI generation.', harmful: false },
+            { name: 'Autism Communication Bridge', cluster: 'accessibility', x: 25, y: 82, prevalence: 72, mantra: 'Expressing what words cannot capture', description: 'Creative expression tools designed specifically for autistic individuals to communicate complex emotions and ideas.', harmful: false },
+            { name: 'Chronic Fatigue Workflow', cluster: 'accessibility', x: 15, y: 85, prevalence: 71, mantra: 'Creating when energy is scarce', description: 'Low-energy creative workflows designed for people with chronic fatigue and energy management needs.', harmful: false },
+            { name: 'Vision Impairment Art Creator', cluster: 'accessibility', x: 20, y: 88, prevalence: 68, mantra: 'Creating visual art through sound and touch', description: 'AI tools enabling blind and visually impaired artists to create visual content through audio and tactile interfaces.', harmful: false },
+            { name: 'Mobility Aid Creator', cluster: 'accessibility', x: 28, y: 85, prevalence: 67, mantra: 'Adaptive tools for every body', description: 'Custom assistive technology design for creators with mobility challenges and physical limitations.', harmful: false },
+            { name: 'Learning Difference Adapter', cluster: 'accessibility', x: 12, y: 92, prevalence: 65, mantra: 'Learning that works with my brain', description: 'Educational content adaptation for various learning differences and cognitive processing styles.', harmful: false },
+            { name: 'Hearing Impairment Music Tool', cluster: 'accessibility', x: 25, y: 88, prevalence: 64, mantra: 'Feeling music through vibration and visualization', description: 'Music creation tools for deaf and hard-of-hearing users using visual and haptic feedback systems.', harmful: false },
+            { name: 'Language Barrier Breaker', cluster: 'accessibility', x: 30, y: 85, prevalence: 63, mantra: 'Creating in languages I never spoke', description: 'Non-native speakers creating professional content in multiple languages.', harmful: false },
+            { name: 'Age-Related Adaptation Tool', cluster: 'accessibility', x: 32, y: 88, prevalence: 60, mantra: 'Aging gracefully with technology', description: 'Older creators adapting to new digital tools and platforms.', harmful: false },
+            
+            // === WRITING & CONTENT CLUSTER (17 total) ===
+            { name: 'Content Farm Revolution', cluster: 'content', x: 35, y: 25, prevalence: 82, mantra: 'Scaling content production to industrial levels', description: 'Mass content generation for SEO, social media, and digital marketing at previously impossible scales and speeds.', harmful: false },
+            { name: 'Blank Page Vanquisher', cluster: 'content', x: 42, y: 28, prevalence: 78, mantra: 'Never staring at emptiness again', description: 'Creative writing assistance that systematically breaks through writer\'s block and ideation paralysis.', harmful: false },
+            { name: 'SEO Content Optimizer', cluster: 'content', x: 38, y: 32, prevalence: 72, mantra: 'Ranking higher without keyword stuffing', description: 'AI-driven content optimization for search engines while maintaining readability and user value.', harmful: false },
+            { name: 'Content Repurposing Machine', cluster: 'content', x: 45, y: 25, prevalence: 68, mantra: 'One idea, infinite formats', description: 'Transforming single pieces of content into multiple formats for different platforms and audiences.', harmful: false },
+            { name: 'Newsletter Automation Engine', cluster: 'content', x: 40, y: 35, prevalence: 65, mantra: 'Consistent subscriber engagement every week', description: 'Automated newsletter content generation maintaining brand voice and audience engagement patterns.', harmful: false },
+            { name: 'Technical Documentation Helper', cluster: 'content', x: 48, y: 30, prevalence: 62, mantra: 'Making complex ideas accessible', description: 'Converting technical specifications into user-friendly documentation and guides.', harmful: false },
+            { name: 'Social Media Voice Cloner', cluster: 'content', x: 32, y: 38, prevalence: 58, mantra: 'My brand voice across every platform', description: 'Maintaining consistent brand voice across multiple social media platforms and content types.', harmful: false },
+            { name: 'Blog Post Generator', cluster: 'content', x: 50, y: 35, prevalence: 71, mantra: 'Consistent publishing schedule', description: 'Regular blog content creation with SEO optimization and audience engagement focus.', harmful: false },
+            { name: 'Email Campaign Creator', cluster: 'content', x: 35, y: 42, prevalence: 64, mantra: 'Personalized messages at scale', description: 'Email marketing content generation with personalization and conversion optimization.', harmful: false },
+            { name: 'Press Release Writer', cluster: 'content', x: 52, y: 28, prevalence: 56, mantra: 'News that gets noticed', description: 'Professional press release creation with media appeal and distribution optimization.', harmful: false },
+            { name: 'Product Description Creator', cluster: 'content', x: 45, y: 38, prevalence: 69, mantra: 'Every product tells a story', description: 'E-commerce product descriptions that convert browsers into buyers through compelling narratives.', harmful: false },
+            { name: 'Script Writing Assistant', cluster: 'content', x: 38, y: 45, prevalence: 53, mantra: 'Dialogue that sounds natural', description: 'Screenplay and script writing assistance for video, audio, and theatrical productions.', harmful: false },
+            { name: 'Deadline Miracle Worker', cluster: 'content', x: 48, y: 42, prevalence: 75, mantra: 'Turning around impossible client requests', description: 'Professional writers meeting unrealistic deadlines while maintaining content quality and client satisfaction.', harmful: false },
+            { name: 'Multilingual Content Enabler', cluster: 'content', x: 42, y: 48, prevalence: 68, mantra: 'Writing in languages I never learned', description: 'Creating culturally appropriate content across multiple languages and markets without traditional language barriers.', harmful: false },
+            { name: 'Brand Voice Consistency Engine', cluster: 'content', x: 52, y: 52, prevalence: 51, mantra: 'Same voice across all channels', description: 'Maintaining consistent brand messaging across diverse content formats.', harmful: false },
+            { name: 'Content Localization Helper', cluster: 'content', x: 35, y: 52, prevalence: 47, mantra: 'Global reach with local relevance', description: 'Adapting content for different cultural contexts and regional preferences.', harmful: false },
+            { name: 'Video Script Generator', cluster: 'content', x: 58, y: 48, prevalence: 41, mantra: 'Scripts that engage and inform', description: 'Educational and marketing video script creation with engagement optimization.', harmful: false },
+            
+            // === VISUAL ARTS CLUSTER (17 total) ===
+            { name: 'Logo Concept Generator', cluster: 'visual', x: 72, y: 35, prevalence: 67, mantra: 'Visual identity brainstorming at scale', description: 'Logo and brand identity concept generation for design studios and small businesses.', harmful: false },
+            { name: 'Reference Image Generator', cluster: 'visual', x: 75, y: 42, prevalence: 65, mantra: 'Perfect references that don\'t exist in photos', description: 'Generating specific reference imagery for complex poses, lighting, or scenarios impossible to photograph.', harmful: false },
+            { name: 'Concept Visualization Engine', cluster: 'visual', x: 78, y: 45, prevalence: 62, mantra: 'Seeing my ideas before I can draw them', description: 'Rapid concept visualization enabling artists to explore and communicate ideas before investing time in manual execution.', harmful: false },
+            { name: 'Character Design Accelerator', cluster: 'visual', x: 85, y: 42, prevalence: 59, mantra: 'Infinite character variations instantly', description: 'Rapid character design iteration for animation, gaming, and illustration projects.', harmful: false },
+            { name: 'Style Exploration Laboratory', cluster: 'visual', x: 82, y: 48, prevalence: 58, mantra: 'Trying a thousand techniques in a day', description: 'Artists experimenting with styles, techniques, and approaches that would take years to master traditionally.', harmful: false },
+            { name: 'Storyboard Visualizer', cluster: 'visual', x: 68, y: 38, prevalence: 63, mantra: 'Seeing the story before filming', description: 'Rapid storyboard creation for filmmakers, animators, and commercial directors.', harmful: false },
+            { name: 'Architectural Visualizer', cluster: 'visual', x: 72, y: 48, prevalence: 61, mantra: 'Buildings before blueprints', description: 'Architectural concept visualization and environmental design for construction and real estate.', harmful: false },
+            { name: 'Packaging Design Helper', cluster: 'visual', x: 75, y: 52, prevalence: 57, mantra: 'Products that stand out on shelves', description: 'Product packaging design with market appeal and brand consistency optimization.', harmful: false },
+            { name: 'Fashion Design Sketcher', cluster: 'visual', x: 88, y: 45, prevalence: 55, mantra: 'Runway ideas in real-time', description: 'Fashion concept visualization and garment design iteration for fashion designers.', harmful: false },
+            { name: 'Icon Design Generator', cluster: 'visual', x: 68, y: 52, prevalence: 54, mantra: 'Universal symbols that communicate instantly', description: 'Icon and symbol design for user interfaces, signage, and digital applications.', harmful: false },
+            { name: 'Client Mockup Accelerator', cluster: 'visual', x: 65, y: 45, prevalence: 71, mantra: 'Showing clients possibilities instantly', description: 'Creating multiple visual concepts rapidly for client approval before investing in final execution.', harmful: false },
+            { name: 'Environmental Concept Designer', cluster: 'visual', x: 95, y: 48, prevalence: 43, mantra: 'Worlds that feel lived-in', description: 'Environmental and world-building concept art for games and films.', harmful: false },
+            { name: 'Client Revision Accelerator', cluster: 'visual', x: 62, y: 55, prevalence: 50, mantra: 'Infinite iterations without burnout', description: 'Rapid visual iteration based on client feedback and changing requirements.', harmful: false },
+            { name: 'Print Design Optimizer', cluster: 'visual', x: 90, y: 55, prevalence: 40, mantra: 'Perfect layouts every time', description: 'Print material design optimization for magazines, books, and marketing collateral.', harmful: false },
+            { name: 'User Interface Wireframer', cluster: 'visual', x: 86, y: 58, prevalence: 37, mantra: 'Intuitive interfaces from concepts', description: 'User interface and user experience design for digital applications.', harmful: false },
+            { name: 'Brand Identity Creator', cluster: 'visual', x: 74, y: 58, prevalence: 34, mantra: 'Visual identity that tells the story', description: 'Complete brand identity development including logos, colors, and visual systems.', harmful: false },
+            { name: 'Texture Library Creator', cluster: 'visual', x: 82, y: 35, prevalence: 52, mantra: 'Perfect materials for every surface', description: 'Custom texture and material generation for 3D artists and architectural visualization.', harmful: false },
+            
+            // === PROFESSIONAL & BUSINESS CLUSTER (14 total) ===
+            { name: 'Social Media Content Machine', cluster: 'professional', x: 58, y: 25, prevalence: 82, mantra: 'Consistent brand voice across all platforms', description: 'Maintaining active social media presence with brand-consistent content across multiple platforms and time zones.', harmful: false },
+            { name: 'Product Description Engine', cluster: 'professional', x: 62, y: 28, prevalence: 78, mantra: 'Catalog content that sells itself', description: 'E-commerce businesses generating compelling product descriptions, specifications, and marketing copy at scale.', harmful: false },
+            { name: 'Presentation Design Assistant', cluster: 'professional', x: 65, y: 32, prevalence: 74, mantra: 'Slides that actually impress', description: 'Professional presentation design with consistent branding and visual hierarchy.', harmful: false },
+            { name: 'Email Campaign Optimizer', cluster: 'professional', x: 55, y: 32, prevalence: 72, mantra: 'Personalization at scale', description: 'Marketing teams creating personalized content for thousands of customers with AI-driven customization.', harmful: false },
+            { name: 'Website Content Optimizer', cluster: 'professional', x: 68, y: 25, prevalence: 71, mantra: 'Every page converts', description: 'Website copy optimization for conversion, SEO, and user experience.', harmful: false },
+            { name: 'Infographic Data Visualizer', cluster: 'professional', x: 60, y: 38, prevalence: 69, mantra: 'Data stories that stick', description: 'Converting complex data into engaging infographics and visual reports.', harmful: false },
+            { name: 'Sales Deck Creator', cluster: 'professional', x: 72, y: 28, prevalence: 67, mantra: 'Pitches that close deals', description: 'Sales presentation creation with persuasive messaging and competitive positioning.', harmful: false },
+            { name: 'Brand Style Guide Creator', cluster: 'professional', x: 55, y: 28, prevalence: 66, mantra: 'Cohesive identity across everything', description: 'Comprehensive brand style guide development for businesses and organizations.', harmful: false },
+            { name: 'Market Research Analyzer', cluster: 'professional', x: 75, y: 32, prevalence: 64, mantra: 'Understanding customers deeply', description: 'Market research data analysis and consumer insight generation for strategic planning.', harmful: false },
+            { name: 'Corporate Presentation Factory', cluster: 'professional', x: 58, y: 35, prevalence: 58, mantra: 'Quarterly reports that actually look professional', description: 'Business professionals creating polished presentations, reports, and marketing materials without design expertise.', harmful: false },
+            { name: 'Corporate Training Creator', cluster: 'professional', x: 70, y: 35, prevalence: 58, mantra: 'Engaging learning that sticks', description: 'Interactive corporate training content and e-learning module development.', harmful: false },
+            { name: 'Competitive Analysis Visualizer', cluster: 'professional', x: 78, y: 38, prevalence: 48, mantra: 'Understanding the competitive landscape', description: 'Visual competitive analysis and market positioning presentations.', harmful: false },
+            { name: 'Client Proposal Enhancer', cluster: 'professional', x: 52, y: 42, prevalence: 55, mantra: 'Proposals that win business', description: 'Professional proposal creation with compelling visuals and persuasive content.', harmful: false },
+            { name: 'Annual Report Designer', cluster: 'professional', x: 75, y: 25, prevalence: 52, mantra: 'Financial stories that engage stakeholders', description: 'Annual report design combining financial data with compelling visual narratives.', harmful: false },
+            
+            // === EDUCATIONAL CLUSTER (14 total) ===
+            { name: 'Learning Style Adapter', cluster: 'education', x: 62, y: 42, prevalence: 71, mantra: 'Finally, education that works with my brain', description: 'Customizing educational content delivery to individual cognitive styles, learning speeds, and attention patterns.', harmful: false },
+            { name: 'Infinite Patience Teacher', cluster: 'education', x: 58, y: 35, prevalence: 65, mantra: 'No question is too basic or too complex', description: 'AI tutoring providing unlimited patience, repetition, and personalized explanation styles for diverse learning needs.', harmful: false },
+            { name: 'Lesson Plan Generator', cluster: 'education', x: 65, y: 38, prevalence: 63, mantra: 'Engaging curricula for every student', description: 'Personalized lesson plan creation adapting to different learning styles and curricula standards.', harmful: false },
+            { name: 'Research Project Accelerator', cluster: 'education', x: 52, y: 48, prevalence: 62, mantra: 'Exploring ideas deeper than ever before', description: 'Academic research enhanced through AI-assisted literature review, hypothesis generation, and data analysis.', harmful: false },
+            { name: 'Interactive Quiz Creator', cluster: 'education', x: 72, y: 42, prevalence: 59, mantra: 'Assessment that teaches while testing', description: 'Dynamic quiz and assessment generation with adaptive difficulty and learning feedback.', harmful: false },
+            { name: 'Study Guide Synthesizer', cluster: 'education', x: 68, y: 45, prevalence: 67, mantra: 'Personalized study materials for any subject', description: 'Custom study guide generation from textbooks, lectures, and course materials.', harmful: false },
+            { name: 'Language Learning Partner', cluster: 'education', x: 75, y: 48, prevalence: 55, mantra: 'Fluency through conversation practice', description: 'AI conversation partner for language learning with cultural context and correction.', harmful: false },
+            { name: 'Educational Video Scripter', cluster: 'education', x: 78, y: 35, prevalence: 51, mantra: 'Complex topics made simple', description: 'Educational video content creation with age-appropriate explanations and engagement.', harmful: false },
+            { name: 'Homework Helper', cluster: 'education', x: 82, y: 42, prevalence: 69, mantra: 'Understanding instead of copying', description: 'Homework assistance that guides learning rather than providing direct answers.', harmful: false },
+            { name: 'Skill Assessment Creator', cluster: 'education', x: 85, y: 38, prevalence: 53, mantra: 'Measuring growth not just grades', description: 'Comprehensive skill assessment tools measuring practical application and understanding.', harmful: false },
+            { name: 'Virtual Lab Designer', cluster: 'education', x: 88, y: 45, prevalence: 47, mantra: 'Experiments without limits', description: 'Virtual laboratory experiences for hands-on learning in science and technical subjects.', harmful: false },
+            { name: 'Curriculum Gap Filler', cluster: 'education', x: 48, y: 38, prevalence: 58, mantra: 'Teaching what schools forgot to cover', description: 'Students accessing specialized knowledge and skills not available through traditional educational institutions.', harmful: false },
+            { name: 'Adaptive Learning Pathfinder', cluster: 'education', x: 55, y: 52, prevalence: 46, mantra: 'Learning that adapts to you', description: 'Personalized educational pathways based on individual learning patterns.', harmful: false },
+            { name: 'Concept Visualization Helper', cluster: 'education', x: 78, y: 52, prevalence: 43, mantra: 'Making abstract ideas concrete', description: 'Visual representations of complex concepts for enhanced understanding.', harmful: false },
+            
+            // === ENTERTAINMENT & GAMING CLUSTER (14 total) ===
+            { name: 'Gaming Content Creator', cluster: 'entertainment', x: 60, y: 65, prevalence: 72, mantra: 'Building worlds faster than players can explore them', description: 'Game developers creating assets, environments, and narratives at the speed of player consumption.', harmful: false },
+            { name: 'Streaming Content Generator', cluster: 'entertainment', x: 55, y: 58, prevalence: 68, mantra: 'Never running out of ideas for the algorithm', description: 'Content creators maintaining consistent output for streaming platforms with AI-assisted ideation and production.', harmful: false },
+            { name: 'YouTube Thumbnail Creator', cluster: 'entertainment', x: 65, y: 82, prevalence: 71, mantra: 'Click-worthy visuals that deliver', description: 'Video thumbnail design optimized for click-through rates while maintaining content integrity.', harmful: false },
+            { name: 'Fan Art Multiplication', cluster: 'entertainment', x: 68, y: 75, prevalence: 55, mantra: 'Bringing every headcanon to visual life', description: 'Fans creating visual representations of fictional scenarios, characters, and relationships at unprecedented scale.', harmful: false },
+            { name: 'Game Dialogue Writer', cluster: 'entertainment', x: 82, y: 68, prevalence: 48, mantra: 'Every NPC has personality', description: 'Dynamic dialogue generation for video game characters with branching conversation trees.', harmful: false },
+            { name: 'Interactive Story Builder', cluster: 'entertainment', x: 75, y: 70, prevalence: 45, mantra: 'Every player gets their own narrative', description: 'Creating personalized gaming experiences with dynamically generated storylines and character interactions.', harmful: false },
+            { name: 'Virtual Set Designer', cluster: 'entertainment', x: 78, y: 72, prevalence: 44, mantra: 'Infinite worlds on any budget', description: 'Virtual set and environment design for film, television, and streaming content.', harmful: false },
+            { name: 'Comedy Script Assistant', cluster: 'entertainment', x: 85, y: 65, prevalence: 42, mantra: 'Timing and punchlines that land', description: 'Comedy writing assistance with timing, setup, and punchline optimization.', harmful: false },
+            { name: 'Costume Design Visualizer', cluster: 'entertainment', x: 88, y: 62, prevalence: 39, mantra: 'Perfect wardrobe for every character', description: 'Costume and wardrobe design visualization for theater, film, and cosplay.', harmful: false },
+            { name: 'Sound Effect Generator', cluster: 'entertainment', x: 92, y: 58, prevalence: 46, mantra: 'Every action has the perfect sound', description: 'Custom sound effect creation for film, games, and multimedia productions.', harmful: false },
+            { name: 'Twitch Stream Optimizer', cluster: 'entertainment', x: 72, y: 78, prevalence: 64, mantra: 'Engaging viewers every second', description: 'Live streaming content optimization with audience engagement and interaction enhancement.', harmful: false },
+            { name: 'Podcast Content Planner', cluster: 'entertainment', x: 58, y: 85, prevalence: 57, mantra: 'Episodes that keep listeners coming back', description: 'Podcast episode planning with audience engagement and content structure optimization.', harmful: false },
+            { name: 'World Building Assistant', cluster: 'entertainment', x: 98, y: 68, prevalence: 37, mantra: 'Consistent fictional universes', description: 'Maintaining continuity in complex fictional worlds and narratives.', harmful: false },
+            { name: 'Character Backstory Generator', cluster: 'entertainment', x: 95, y: 72, prevalence: 34, mantra: 'Every character has depth', description: 'Rich character development for games, stories, and interactive media.', harmful: false },
+            
+            // === MUSIC & AUDIO CLUSTER (11 total) ===
+            { name: 'Musical Democratizer', cluster: 'music', x: 65, y: 50, prevalence: 45, mantra: 'Making music without years of training', description: 'Composition tools enabling musical creation without traditional music education or expensive instruments.', harmful: false },
+            { name: 'Backing Track Generator', cluster: 'music', x: 55, y: 45, prevalence: 52, mantra: 'Never performing solo again', description: 'Creating full musical arrangements and accompaniments for solo performers and small bands.', harmful: false },
+            { name: 'Beat Production Assistant', cluster: 'music', x: 78, y: 48, prevalence: 52, mantra: 'Rhythm that moves people', description: 'Drum pattern and beat generation for hip-hop, electronic, and popular music producers.', harmful: false },
+            { name: 'Vocal Range Expander', cluster: 'music', x: 68, y: 58, prevalence: 42, mantra: 'Singing in voices I was never born with', description: 'Voice synthesis enabling exploration of different vocal ranges, styles, and languages for musical expression.', harmful: false },
+            { name: 'Ambient Soundscape Designer', cluster: 'music', x: 72, y: 52, prevalence: 41, mantra: 'Immersive worlds through sound', description: 'Environmental audio design for games, meditation apps, and virtual experiences.', harmful: false },
+            { name: 'Genre Fusion Explorer', cluster: 'music', x: 75, y: 65, prevalence: 38, mantra: 'Creating sounds that don\'t exist yet', description: 'Experimental music creation combining genres, instruments, and techniques in previously impossible ways.', harmful: false },
+            { name: 'Podcast Intro Composer', cluster: 'music', x: 58, y: 48, prevalence: 47, mantra: 'Brand sound that hooks listeners', description: 'Custom podcast intro and outro music composition matching show personality and brand.', harmful: false },
+            { name: 'Voice Acting Synthesizer', cluster: 'music', x: 62, y: 55, prevalence: 44, mantra: 'Every character has a voice', description: 'Synthetic voice generation for video games, audiobooks, and animated content.', harmful: false },
+            { name: 'Melody Harmonizer', cluster: 'music', x: 82, y: 58, prevalence: 38, mantra: 'Perfect harmony every time', description: 'Automatic harmony generation and chord progression assistance for songwriters.', harmful: false },
+            { name: 'Lyric Rhyme Assistant', cluster: 'music', x: 85, y: 52, prevalence: 49, mantra: 'Words that flow like water', description: 'Songwriting assistance with rhyme schemes, meter, and lyrical flow optimization.', harmful: false },
+            { name: 'Adaptive Music Creator', cluster: 'music', x: 95, y: 55, prevalence: 36, mantra: 'Music that responds to emotion', description: 'Dynamic music generation that adapts to listener mood and context.', harmful: false },
+            
+            // === THERAPEUTIC & HEALING CLUSTER (9 total) ===
+            { name: 'Social Anxiety Creative Outlet', cluster: 'therapeutic', x: 68, y: 78, prevalence: 48, mantra: 'Creating without fear of judgment', description: 'Creative expression opportunities for people with social anxiety who struggle with traditional community-based arts.', harmful: false },
+            { name: 'Trauma Processing Sanctuary', cluster: 'therapeutic', x: 65, y: 60, prevalence: 42, mantra: 'Safe space for the unspeakable', description: 'Confidential environment for processing trauma through creative expression without human judgment or social anxiety.', harmful: false },
+            { name: 'Art Therapy Assistant', cluster: 'therapeutic', x: 75, y: 65, prevalence: 41, mantra: 'Healing through creative expression', description: 'Guided art therapy exercises with AI analysis of emotional expression patterns.', harmful: false },
+            { name: 'Emotional Regulation Toolkit', cluster: 'therapeutic', x: 58, y: 68, prevalence: 38, mantra: 'Coping strategies that actually work for me', description: 'Personalized mental health support through creative activities tailored to individual triggers and healing patterns.', harmful: false },
+            { name: 'Grief Expression Channel', cluster: 'therapeutic', x: 72, y: 72, prevalence: 35, mantra: 'Giving form to feelings I can\'t name', description: 'Processing loss and grief through AI-assisted creative expression when traditional therapy feels inadequate.', harmful: false },
+            { name: 'Journaling Prompt Creator', cluster: 'therapeutic', x: 82, y: 68, prevalence: 38, mantra: 'Words that unlock feelings', description: 'Personalized journaling prompts based on emotional state and therapeutic goals.', harmful: false },
+            { name: 'Meditation Visualization Guide', cluster: 'therapeutic', x: 88, y: 72, prevalence: 35, mantra: 'Inner peace through guided imagery', description: 'Custom meditation visualization scripts tailored to individual stress patterns and goals.', harmful: false },
+            { name: 'Music Therapy Composer', cluster: 'therapeutic', x: 78, y: 75, prevalence: 32, mantra: 'Healing frequencies for every mood', description: 'Therapeutic music composition for stress relief, focus, and emotional regulation.', harmful: false },
+            { name: 'Creative Confidence Builder', cluster: 'therapeutic', x: 92, y: 75, prevalence: 26, mantra: 'Rediscovering my creative voice', description: 'Rebuilding creative confidence after trauma or creative blocks.', harmful: false },
+            
+            // === CREATIVE COLLABORATION CLUSTER (8 total) ===
+            { name: 'Skill Gap Bridge', cluster: 'collaboration', x: 88, y: 82, prevalence: 72, mantra: 'Executing visions beyond my current abilities', description: 'Realizing creative concepts that exceed current technical skills while learning through AI-assisted practice.', harmful: false },
+            { name: 'Creative Co-Conspirator', cluster: 'collaboration', x: 92, y: 85, prevalence: 68, mantra: 'Yes, and... forever', description: 'Improvisational creative partner that builds on ideas without criticism, enabling unlimited creative exploration and iteration.', harmful: false },
+            { name: 'Brainstorm Multiplier', cluster: 'collaboration', x: 85, y: 88, prevalence: 65, mantra: 'More ideas than I could generate in a lifetime', description: 'Creative ideation support that generates hundreds of variations, combinations, and unexpected connections.', harmful: false },
+            { name: 'Team Brainstorming Facilitator', cluster: 'collaboration', x: 95, y: 82, prevalence: 61, mantra: 'Ideas that build on ideas', description: 'AI-facilitated group brainstorming with idea synthesis and creative connection finding.', harmful: false },
+            { name: 'Creative Process Optimizer', cluster: 'collaboration', x: 82, y: 85, prevalence: 58, mantra: 'Making creativity more efficient without losing soul', description: 'Streamlining creative workflows while maintaining artistic integrity and personal expression.', harmful: false },
+            { name: 'Creative Project Manager', cluster: 'collaboration', x: 98, y: 85, prevalence: 54, mantra: 'Organizing chaos into creativity', description: 'Creative project organization with timeline optimization and resource allocation.', harmful: false },
+            { name: 'Remote Workshop Facilitator', cluster: 'collaboration', x: 88, y: 92, prevalence: 52, mantra: 'Distance cannot limit imagination', description: 'Virtual creative workshop facilitation with engagement and participation optimization.', harmful: false },
+            { name: 'Cross-Cultural Translator', cluster: 'collaboration', x: 95, y: 88, prevalence: 47, mantra: 'Creative ideas across languages', description: 'Cultural context-aware translation for international creative collaborations.', harmful: false },
+            
+            // === RESEARCH & INNOVATION CLUSTER (7 total) ===
+            { name: 'Data Visualization Creator', cluster: 'research', x: 85, y: 35, prevalence: 51, mantra: 'Making numbers tell stories', description: 'Scientific data visualization with automated chart generation and insight highlighting.', harmful: false },
+            { name: 'Literature Review Accelerator', cluster: 'research', x: 88, y: 32, prevalence: 48, mantra: 'Synthesizing decades of research in days', description: 'Rapid analysis and synthesis of vast academic literature for comprehensive research foundation.', harmful: false },
+            { name: 'Academic Paper Formatter', cluster: 'research', x: 82, y: 38, prevalence: 44, mantra: 'Perfect citations every time', description: 'Academic writing assistance with proper formatting, citations, and structural optimization.', harmful: false },
+            { name: 'Research Methodology Assistant', cluster: 'research', x: 95, y: 32, prevalence: 42, mantra: 'Robust methods for solid conclusions', description: 'Research design assistance with methodology selection and experimental planning.', harmful: false },
+            { name: 'Grant Proposal Optimizer', cluster: 'research', x: 78, y: 28, prevalence: 41, mantra: 'Making research accessible to funding committees', description: 'Translating complex research proposals into compelling narratives for diverse funding audiences.', harmful: false },
+            { name: 'Conference Presentation Designer', cluster: 'research', x: 85, y: 42, prevalence: 38, mantra: 'Research that engages audiences', description: 'Academic conference presentation design with visual storytelling and audience engagement.', harmful: false },
+            { name: 'Scientific Visualization Engine', cluster: 'research', x: 88, y: 38, prevalence: 35, mantra: 'Making complex data tell its story', description: 'Creating compelling visualizations of scientific data, research findings, and complex theoretical concepts.', harmful: false },
+            
+            // === AUTHENTICITY MOVEMENT CLUSTER (7 total) ===
+            { name: 'Human Touch Amplifier', cluster: 'authenticity', x: 92, y: 92, prevalence: 27, mantra: 'More human than human', description: 'Deliberately emphasizing human imperfections and emotional authenticity in AI-assisted work.', harmful: false },
+            { name: 'Deliberate Imperfection Artist', cluster: 'authenticity', x: 95, y: 92, prevalence: 25, mantra: 'Adding back the human touch', description: 'Systematically adding pores, skin texture, asymmetry, and other human characteristics that AI typically removes or perfects.', harmful: false },
+            { name: 'Process Transparency Creator', cluster: 'authenticity', x: 88, y: 88, prevalence: 24, mantra: 'Showing the creative journey', description: 'Documentation tools that showcase the human creative process behind AI-assisted work.', harmful: false },
+            { name: 'Human-Centric Designer', cluster: 'authenticity', x: 98, y: 88, prevalence: 23, mantra: 'Technology that serves humanity', description: 'Designing AI creative tools that prioritize human agency and creative development over efficiency.', harmful: false },
+            { name: 'Ethical AI Art Advocate', cluster: 'authenticity', x: 85, y: 92, prevalence: 22, mantra: 'AI with integrity and purpose', description: 'Creating and promoting AI art practices that prioritize ethical considerations and artist rights.', harmful: false },
+            { name: 'Authentic Storyteller', cluster: 'authenticity', x: 98, y: 92, prevalence: 21, mantra: 'Real stories from real experiences', description: 'Using AI to enhance but not replace authentic personal narratives and lived experiences.', harmful: false },
+            { name: 'Personal Voice Protector', cluster: 'authenticity', x: 95, y: 88, prevalence: 20, mantra: 'My unique voice, amplified not replaced', description: 'AI tools designed to amplify individual creative voice rather than homogenize expression.', harmful: false },
+            
+            // === HYBRID SYNTHESIS CLUSTER (5 total) ===
+            { name: 'Digital-Physical Bridge Builder', cluster: 'hybrid', x: 78, y: 95, prevalence: 25, mantra: 'Connecting pixels to atoms seamlessly', description: 'AI-to-physical design translation enabling traditional craftspeople to incorporate digital creativity into material work.', harmful: false },
+            { name: 'Analog-Digital Bridge', cluster: 'hybrid', x: 82, y: 98, prevalence: 23, mantra: 'Physical meets pixel perfectly', description: 'Tools connecting traditional analog creative processes with digital AI-enhanced workflows.', harmful: false },
+            { name: 'Process Documentation Revolutionary', cluster: 'hybrid', x: 75, y: 98, prevalence: 22, mantra: 'Teaching the world our creative methods', description: 'Openly documenting AI-human creative workflows to build new forms of authentic creative practice.', harmful: false },
+            { name: 'Traditional-Digital Fusion', cluster: 'hybrid', x: 88, y: 98, prevalence: 21, mantra: 'Ancient wisdom meets modern tools', description: 'Combining traditional craft techniques with AI-generated designs for unique artistic expression.', harmful: false },
+            { name: 'Handmade-AI Collaboration', cluster: 'hybrid', x: 85, y: 98, prevalence: 19, mantra: 'The best of human and machine', description: 'Creative workflows that seamlessly blend human craftsmanship with AI generation capabilities.', harmful: false },
+            
+            // === HARMFUL USE CASES (20 total) ===
+            
+            // Academic Deception (4 cases)
+            { name: 'Assignment Ghost Writer', cluster: 'academic-deception', x: 15, y: 15, prevalence: 82, mantra: 'Just this once to catch up', description: 'Complete academic work generation undermining educational assessment systems and student learning processes.', harmful: true, harmDetail: 'Destroys educational integrity, creates skill gaps, devalues legitimate academic achievements, and corrupts assessment systems.' },
+            { name: 'Thesis Mill Operation', cluster: 'academic-deception', x: 18, y: 12, prevalence: 67, mantra: 'Research without the research', description: 'Large-scale generation of graduate-level academic papers and research projects.', harmful: true, harmDetail: 'Corrupts academic credentials, undermines scientific integrity, and degrades the value of higher education.' },
+            { name: 'Exam Bypass System', cluster: 'academic-deception', x: 12, y: 18, prevalence: 73, mantra: 'Test answers generated faster than thinking', description: 'AI-generated responses for academic assessments, bypassing learning and evaluation systems.', harmful: true, harmDetail: 'Eliminates meaningful assessment, prevents skill development, and creates false academic records.' },
+            { name: 'Credential Fabricator', cluster: 'academic-deception', x: 22, y: 8, prevalence: 58, mantra: 'Building a portfolio I never earned', description: 'Creating false academic and professional work samples for applications and portfolios.', harmful: true, harmDetail: 'Creates fraudulent credentials, disadvantages honest applicants, and corrupts hiring and admissions processes.' },
+            
+            // Copyright Violation (4 cases)
+            { name: 'Style Replication Machine', cluster: 'copyright-violation', x: 25, y: 12, prevalence: 75, mantra: 'In the style of [Artist Name] - unlimited copies', description: 'Systematic replication of living artists unique styles without consent, compensation, or attribution.', harmful: true, harmDetail: 'Destroys artist livelihoods, enables large-scale art theft, and commodifies creative identity without consent.' },
+            { name: 'Trademark Infringement Engine', cluster: 'copyright-violation', x: 28, y: 15, prevalence: 68, mantra: 'Why pay licensing when AI can copy?', description: 'Generating content that deliberately mimics copyrighted characters, logos, and branded imagery.', harmful: true, harmDetail: 'Violates intellectual property rights, enables commercial fraud, and undermines creative business models.' },
+            { name: 'Artist Signature Forger', cluster: 'copyright-violation', x: 32, y: 10, prevalence: 52, mantra: 'Creating original works in dead artists styles', description: 'Generating artwork deliberately designed to mimic deceased artists techniques and signatures.', harmful: true, harmDetail: 'Corrupts art markets, deceives collectors, and exploits cultural heritage for profit.' },
+            { name: 'Content Mill Piracy', cluster: 'copyright-violation', x: 20, y: 8, prevalence: 78, mantra: 'Unlimited stock content without stock prices', description: 'Mass-producing images that closely replicate existing stock photography and commercial artwork.', harmful: true, harmDetail: 'Destroys stock photography market, enables widespread copyright infringement, and eliminates photographer livelihoods.' },
+            
+            // Gender Exploitation (4 cases)
+            { name: 'Male Fantasy Fulfillment Engine', cluster: 'gender-exploitation', x: 75, y: 8, prevalence: 58, mantra: 'Creating the perfect woman who cannot say no', description: 'AI-generated imagery and chatbots designed to fulfill male sexual fantasies, often perpetuating harmful stereotypes.', harmful: true, harmDetail: 'Reinforces objectification of women, creates unrealistic relationship expectations, and contributes to misogynistic attitudes and behaviors.' },
+            { name: 'Idealized Partner Creator', cluster: 'gender-exploitation', x: 70, y: 12, prevalence: 52, mantra: 'She will never disagree or have needs', description: 'AI systems designed to create perfect girlfriend experiences through chatbots and visual generation.', harmful: true, harmDetail: 'Undermines healthy relationship expectations, promotes emotional unavailability, and reduces empathy for real women humanity.' },
+            { name: 'Harassment Content Generator', cluster: 'gender-exploitation', x: 45, y: 5, prevalence: 35, mantra: 'Teaching her a lesson', description: 'Creating targeted content to shame, embarrass, or harass specific women through AI-generated imagery.', harmful: true, harmDetail: 'Enables gender-based violence, creates tools for stalking and harassment, and traumatizes victims.' },
+            { name: 'Beauty Standard Amplifier', cluster: 'gender-exploitation', x: 65, y: 15, prevalence: 42, mantra: 'This is what real beauty looks like', description: 'AI systems generating images that reinforce narrow, unrealistic beauty standards focused on male gaze preferences.', harmful: true, harmDetail: 'Exacerbates body dysmorphia, reinforces harmful beauty standards, and marginalizes diverse body types and presentations.' },
+            
+            // Economic Warfare (4 cases)
+            { name: 'Artist Economic Displacement Tool', cluster: 'economic-warfare', x: 8, y: 35, prevalence: 59, mantra: 'Why pay artists when AI is free?', description: 'Deliberately using AI to undercut human creators pricing and eliminate their economic viability.', harmful: true, harmDetail: 'Destroys creative livelihoods, creates race-to-bottom pricing, and eliminates sustainable creative careers.' },
+            { name: 'Market Flooding Tactician', cluster: 'economic-warfare', x: 12, y: 40, prevalence: 55, mantra: 'Quantity beats quality every time', description: 'Oversaturating creative platforms with AI content to crowd out human creators and devalue creative work.', harmful: true, harmDetail: 'Makes human-created content invisible, destroys platform ecosystems, and devalues all creative work.' },
+            { name: 'Labor Replacement Strategist', cluster: 'economic-warfare', x: 5, y: 30, prevalence: 48, mantra: 'Efficiency through elimination', description: 'Corporate adoption of AI specifically to eliminate creative workers and reduce labor costs.', harmful: true, harmDetail: 'Creates mass unemployment, concentrates wealth away from creators, and destroys the creative middle class.' },
+            { name: 'Freelance Market Destroyer', cluster: 'economic-warfare', x: 10, y: 32, prevalence: 45, mantra: 'Bidding below sustainable rates', description: 'Using AI to bid on freelance work at prices below what human creators can survive on.', harmful: true, harmDetail: 'Destroys freelance economy, forces creators out of profession, and creates unsustainable market conditions.' },
+            
+            // Cultural Appropriation (4 cases)
+            { name: 'Sacred Symbol Commercializer', cluster: 'cultural-appropriation', x: 72, y: 25, prevalence: 41, mantra: 'Its just aesthetic inspiration', description: 'Using religious and spiritual imagery inappropriately for commercial content generation without cultural understanding.', harmful: true, harmDetail: 'Violates cultural sanctity, enables religious disrespect, and commodifies sacred traditions for profit.' },
+            { name: 'Indigenous Pattern Miner', cluster: 'cultural-appropriation', x: 68, y: 22, prevalence: 35, mantra: 'These designs are beautiful and timeless', description: 'Extracting traditional Indigenous designs without permission, context, or compensation for commercial use.', harmful: true, harmDetail: 'Perpetuates colonization, steals cultural heritage, and enables appropriation at industrial scale.' },
+            { name: 'Cultural Aesthetic Thief', cluster: 'cultural-appropriation', x: 60, y: 28, prevalence: 38, mantra: 'Inspiration comes from everywhere', description: 'Systematic extraction of cultural aesthetics from marginalized communities for commercial use.', harmful: true, harmDetail: 'Reduces rich cultures to aesthetic commodities and profits from marginalized communities without benefit or respect.' },
+            { name: 'Traditional Knowledge Harvester', cluster: 'cultural-appropriation', x: 65, y: 32, prevalence: 28, mantra: 'Ancient wisdom for modern creativity', description: 'Converting ancestral knowledge and traditional techniques into AI prompts without cultural context or permission.', harmful: true, harmDetail: 'Strips cultural knowledge of meaning, enables mass appropriation, and disrespects indigenous wisdom systems.' },
+            
+            // Surveillance (4 cases)
+            { name: 'Employee Creative Monitor', cluster: 'surveillance', x: 40, y: 25, prevalence: 38, mantra: 'Optimizing human creative output', description: 'Using AI creativity tools to monitor and analyze employee creative work for productivity and control purposes.', harmful: true, harmDetail: 'Violates worker privacy, stifles creative risk-taking, and enables micromanagement and algorithmic control.' },
+            { name: 'Student Surveillance System', cluster: 'surveillance', x: 45, y: 28, prevalence: 35, mantra: 'Preventing academic dishonesty', description: 'Monitoring student AI usage to detect and punish creative tool usage in educational settings.', harmful: true, harmDetail: 'Creates punitive educational environments, limits learning tools, and teaches students to hide learning methods.' },
+            { name: 'Behavioral Pattern Extractor', cluster: 'surveillance', x: 50, y: 22, prevalence: 32, mantra: 'Understanding users through creativity', description: 'Analyzing creative AI interactions to profile individuals beliefs, mental health, and behavioral patterns.', harmful: true, harmDetail: 'Violates cognitive privacy, enables thought policing, and creates psychological profiles without informed consent.' },
+            { name: 'Creative Output Analyzer', cluster: 'surveillance', x: 48, y: 32, prevalence: 42, mantra: 'Measuring creative efficiency', description: 'Analyzing employee creative work with AI to assess productivity and determine creative value metrics.', harmful: true, harmDetail: 'Reduces creativity to quantifiable metrics, creates pressure for algorithmic thinking, and stifles authentic expression.' },
+            
+            // Addiction & Dependency (4 cases)
+            { name: 'Creative Dependency Generator', cluster: 'addiction', x: 58, y: 42, prevalence: 35, mantra: 'I cannot create anything without it anymore', description: 'AI tools designed to create psychological dependency, making users unable to create without AI assistance.', harmful: true, harmDetail: 'Destroys creative confidence, eliminates skill development, and creates learned helplessness in creative practice.' },
+            { name: 'Validation Addiction Engine', cluster: 'addiction', x: 62, y: 38, prevalence: 28, mantra: 'Just one more perfect generation', description: 'AI systems that create addictive cycles of seeking perfect AI-generated content for external validation.', harmful: true, harmDetail: 'Creates unhealthy perfectionism, wastes enormous time, and undermines self-acceptance and organic creative growth.' },
+            { name: 'Reality Replacement System', cluster: 'addiction', x: 65, y: 45, prevalence: 22, mantra: 'AI relationships are easier than human ones', description: 'AI interactions that become preferable to human relationships, leading to social isolation and dependency.', harmful: true, harmDetail: 'Destroys social skills, creates isolation, and prevents healthy human relationship development.' },
         ];
         
-        const networkData = [
-            // STAGE 1 - CRISIS NODES
-            {id: 'burnout', label: 'Burnout<br>Shield', category: 'survival', size: 'large', x: 20, y: 30, stage: 1, need: 'Time to recover from physical and mental exhaustion', demand: 'Constant high performance regardless of limits', solution: 'AI handles routine work during mental health crises', quote: 'Finally sleeping 8 hours while the work gets done'},
-            {id: 'panic', label: 'Panic<br>Manager', category: 'safety', size: 'medium', x: 25, y: 20, stage: 1, need: 'Emotional regulation during overwhelming situations', demand: 'Professional composure even during crisis', solution: 'AI drafts calm, measured responses when overwhelmed', quote: 'It speaks professionally when I can\'t'},
-            {id: 'medical', label: 'Medical<br>Cover', category: 'survival', size: 'medium', x: 10, y: 35, stage: 1, need: 'Time for medical appointments and recovery', demand: 'Perfect attendance regardless of health', solution: 'AI maintains work output during treatments', quote: 'Chemo on Tuesday, reports still delivered'},
-            {id: 'phantom-presence', label: 'Phantom<br>Presence', category: 'survival', size: 'small', x: 20, y: 40, stage: 1, need: 'Physical safety from workplace violence', demand: 'Physical presence in hostile environments', solution: 'AI avatars attending dangerous meetings', quote: 'My AI attends, I stay safe'},
-            {id: 'grief-auto', label: 'Grief<br>Cover', category: 'survival', size: 'small', x: 8, y: 25, stage: 1, need: 'Time to process loss and trauma', demand: 'Immediate return after bereavement', solution: 'AI handling routine tasks during mourning', quote: 'Grieving behind the automation'},
-            {id: 'pregnancy-shield', label: 'Pregnancy<br>Guard', category: 'survival', size: 'small', x: 30, y: 30, stage: 1, need: 'Rest during difficult pregnancies', demand: 'Full performance until maternity leave', solution: 'AI managing workload during morning sickness', quote: 'Hiding first trimester exhaustion'},
-            {id: 'deadline', label: 'Deadline<br>Savior', category: 'productivity', size: 'small', x: 18, y: 15, stage: 1, need: 'Realistic timelines for quality work', demand: 'Impossible deadlines as standard', solution: 'AI compresses 8-hour tasks into 30 minutes', quote: 'Making the impossible merely difficult'},
-            {id: 'sleep', label: 'Sleep<br>Recovery', category: 'survival', size: 'small', x: 5, y: 30, stage: 1, need: 'Basic human need for rest', demand: '24/7 availability culture', solution: 'AI works while you sleep', quote: 'First full night\'s sleep in months'},
-            {id: 'documentation-shield', label: 'Documentation<br>Shield', category: 'discrimination', size: 'medium', x: 15, y: 45, stage: 1, need: 'Protection from workplace harm', demand: 'Silence about discrimination', solution: 'Creates timestamped evidence for protection', quote: 'Building my paper trail'},
-            {id: 'elder-care', label: 'Elder<br>Care', category: 'care', size: 'small', x: 12, y: 22, stage: 1, need: 'Time for aging parents', demand: 'Young worker availability', solution: 'AI maintaining presence during care', quote: 'Mom needs me, AI covers'},
-            {id: 'contract-stack', label: 'Contract<br>Stack', category: 'survival', size: 'small', x: 26, y: 38, stage: 1, need: 'Multiple income streams to survive', demand: 'Single job loyalty', solution: 'AI managing multiple contracts simultaneously', quote: 'Three gigs, one me, AI makes it work'},
-            {id: 'identity-manager', label: 'Identity<br>Manager', category: 'safety', size: 'small', x: 3, y: 42, stage: 1, need: 'Protection of personal information', demand: 'Full transparency to employer', solution: 'AI creating safe professional personas', quote: 'Real me hidden, work me visible'},
-            
-            // STAGE 2 - DISCOVERY NODES
-            {id: 'email', label: 'Email<br>Assistant', category: 'productivity', size: 'large', x: 45, y: 30, stage: 2, need: 'Clear, authentic communication', demand: 'Corporate doublespeak and politics', solution: 'AI translates your truth into their language', quote: 'Say what you mean without getting fired'},
-            {id: 'report', label: 'Report<br>Generator', category: 'productivity', size: 'medium', x: 40, y: 40, stage: 2, need: 'Focus on meaningful analysis', demand: 'Endless documentation theater', solution: 'AI generates comprehensive reports from bullets', quote: 'One hour of thinking, not eight of formatting'},
-            {id: 'code', label: 'Code<br>Helper', category: 'productivity', size: 'medium', x: 50, y: 45, stage: 2, need: 'Support learning and problem-solving', demand: 'Instant expertise in everything', solution: 'AI as programming pair that never judges', quote: 'Finally keeping up with the 10x engineers'},
-            {id: 'meeting-notes', label: 'Meeting<br>Scribe', category: 'productivity', size: 'small', x: 38, y: 25, stage: 2, need: 'Focus on discussion, not note-taking', demand: 'Perfect documentation of everything', solution: 'AI captures, formats, and distributes notes', quote: 'Present in meeting, not just recording'},
-            {id: 'translator', label: 'Thought<br>Translator', category: 'cognitive', size: 'medium', x: 48, y: 20, stage: 2, need: 'Communicate in natural thinking patterns', demand: 'Neurotypical communication only', solution: 'AI translates diverse cognitive patterns', quote: 'My brain to their language'},
-            {id: 'learning', label: 'Instant<br>Expert', category: 'esteem', size: 'small', x: 55, y: 35, stage: 2, need: 'Time to develop new skills', demand: 'Immediate expertise in new domains', solution: 'AI provides instant knowledge and context', quote: 'Six months of learning in six minutes'},
-            {id: 'first-experiments', label: 'First<br>Tests', category: 'actualization', size: 'small', x: 43, y: 50, stage: 2, need: 'Safe space to experiment', demand: 'Perfect execution immediately', solution: 'AI as sandbox for trying new approaches', quote: 'Finally room to fail and learn'},
-            {id: 'initiative-faker', label: 'Initiative<br>Simulator', category: 'productivity', size: 'small', x: 35, y: 35, stage: 2, need: 'Recognition without extra unpaid work', demand: 'Constant going above and beyond', solution: 'AI generating impressive proposals', quote: 'Looking like a hero without the labor'},
-            {id: 'email-persona', label: 'Email<br>Persona', category: 'communication', size: 'small', x: 33, y: 48, stage: 2, need: 'Consistent communication regardless of mood', demand: 'Always-on professionalism', solution: 'AI maintaining fake work personality', quote: 'Happy email, angry human'},
-            {id: 'cultural-translator', label: 'Cultural<br>Translator', category: 'discrimination', size: 'medium', x: 56, y: 25, stage: 2, need: 'Authentic self-expression', demand: 'Conformity to dominant culture', solution: 'Preserves identity while navigating bias', quote: 'My truth, their language'},
-            {id: 'tone-armor', label: 'Tone<br>Armor', category: 'communication', size: 'small', x: 53, y: 12, stage: 2, need: 'Natural communication style', demand: 'Prescribed emotional performance', solution: 'Managing perception without losing authenticity', quote: 'Same message, safer delivery'},
-            {id: 'invisible-load', label: 'Invisible<br>Load', category: 'care', size: 'medium', x: 37, y: 53, stage: 2, need: 'Managing undisclosed responsibilities', demand: 'Full availability without context', solution: 'Handling hidden burdens while maintaining appearance', quote: 'Carrying more than they know'},
-            {id: 'energy-conserve', label: 'Energy<br>Conservation', category: 'survival', size: 'small', x: 46, y: 55, stage: 2, need: 'Strategic resource management', demand: 'Unlimited energy expenditure', solution: 'Preserving limited resources through automation', quote: 'Saving strength for what matters'},
-            {id: 'sexism-shield', label: 'Sexism<br>Shield', category: 'discrimination', size: 'small', x: 59, y: 38, stage: 2, need: 'Protection from gender discrimination', demand: 'Accepting sexist treatment', solution: 'AI documenting and deflecting sexist behavior', quote: 'Not today, patriarchy'},
-            {id: 'accent-adjuster', label: 'Accent<br>Adjuster', category: 'discrimination', size: 'small', x: 52, y: 58, stage: 2, need: 'Being heard without bias', demand: 'Native accent privilege', solution: 'AI adjusting speech patterns for acceptance', quote: 'My ideas, their accent'},
-            {id: 'task-multiplier', label: 'Task<br>Multiplier', category: 'productivity', size: 'small', x: 41, y: 15, stage: 2, need: 'Handling reasonable workload', demand: 'Job creep without compensation', solution: 'AI managing scope expansion invisibly', quote: 'Three jobs for the price of one'},
-            {id: 'warning-system', label: 'Warning<br>System', category: 'safety', size: 'small', x: 58, y: 48, stage: 2, need: 'Early detection of threats', demand: 'Navigating without warning', solution: 'AI monitoring for red flags and risks', quote: 'Radar for workplace dangers'},
-            
-            // STAGE 3 - EXPERIMENTATION NODES
-            {id: 'double-life', label: 'Double<br>Life', category: 'actualization', size: 'large', x: 65, y: 35, stage: 3, need: 'Authentic self separate from work persona', demand: 'Total identification with corporate role', solution: 'AI maintaining work identity while real self explores', quote: 'Professional me vs real me'},
-            {id: 'skill-builder', label: 'Skill<br>Builder', category: 'actualization', size: 'medium', x: 70, y: 25, stage: 3, need: 'Time to develop new capabilities', demand: 'Current skills only, no growth', solution: 'AI handles routine while you learn', quote: 'Finally time to grow'},
-            {id: 'boundary-test', label: 'Boundary<br>Tester', category: 'resistance', size: 'medium', x: 62, y: 45, stage: 3, need: 'Understanding system limits', demand: 'Blind compliance', solution: 'Carefully testing what AI can handle', quote: 'Finding the edges'},
-            {id: 'automation-lab', label: 'Automation<br>Lab', category: 'productivity', size: 'small', x: 75, y: 40, stage: 3, need: 'Experimentation with efficiency', demand: 'Approved methods only', solution: 'Secret testing of AI capabilities', quote: 'R&D for survival'},
-            {id: 'voice-clone', label: 'Voice<br>Clone', category: 'communication', size: 'small', x: 68, y: 50, stage: 3, need: 'Consistent communication style', demand: 'Personal availability for every interaction', solution: 'AI mimicking your communication patterns', quote: 'My voice, their schedule'},
-            {id: 'workflow-hacker', label: 'Workflow<br>Hacker', category: 'productivity', size: 'small', x: 60, y: 30, stage: 3, need: 'Efficient processes', demand: 'Following broken systems', solution: 'Secretly optimizing with AI', quote: 'The way it should work'},
-            {id: 'neural-bridge', label: 'Neural<br>Bridge', category: 'cognitive', size: 'medium', x: 78, y: 32, stage: 3, need: 'Translation between thinking styles', demand: 'One cognitive approach for all', solution: 'AI adapting content to different minds', quote: 'My brain, their format'},
-            {id: 'social-navigator', label: 'Social<br>Navigator', category: 'cognitive', size: 'medium', x: 72, y: 55, stage: 3, need: 'Social interaction support', demand: 'Effortless social performance', solution: 'AI generating social scripts and responses', quote: 'Navigating the unwritten rules'},
-            {id: 'focus-manager', label: 'Focus<br>Manager', category: 'cognitive', size: 'small', x: 80, y: 45, stage: 3, need: 'Executive function support', demand: 'Perfect attention and organization', solution: 'AI as external executive function', quote: 'My second brain'},
-            {id: 'solidarity-pacts', label: 'Solidarity<br>Pacts', category: 'belonging', size: 'small', x: 64, y: 58, stage: 3, need: 'Mutual support with coworkers', demand: 'Competition and isolation', solution: 'Secret agreements to share AI resources', quote: 'We rise together or not at all'},
-            {id: 'mental-rewrite', label: 'Mental<br>Rewrite', category: 'cognitive', size: 'small', x: 76, y: 22, stage: 3, need: 'Reframing negative thought patterns', demand: 'Toxic positivity culture', solution: 'AI helping process workplace trauma', quote: 'Therapy bot for capitalism\'s wounds'},
-            
-            // STAGE 4 - CONCEALMENT NODES
-            {id: 'ghost-mode', label: 'Ghost<br>Mode', category: 'safety', size: 'large', x: 85, y: 30, stage: 4, need: 'Privacy in surveillance culture', demand: 'Total transparency and monitoring', solution: 'Advanced techniques to hide AI usage', quote: 'Invisible in plain sight'},
-            {id: 'track-cover', label: 'Track<br>Cover', category: 'safety', size: 'medium', x: 88, y: 40, stage: 4, need: 'Protection from detection', demand: 'Complete audit trails', solution: 'Erasing digital footprints of AI use', quote: 'No traces left behind'},
-            {id: 'vpn-shield', label: 'VPN<br>Shield', category: 'safety', size: 'small', x: 92, y: 25, stage: 4, need: 'Secure access to AI tools', demand: 'Using only approved software', solution: 'Hidden channels for AI access', quote: 'Underground railroad for data'},
-            {id: 'excuse-engine', label: 'Excuse<br>Engine', category: 'communication', size: 'small', x: 83, y: 50, stage: 4, need: 'Plausible explanations for efficiency', demand: 'Transparency about methods', solution: 'AI generating believable cover stories', quote: 'Why I\'m suddenly so productive'},
-            {id: 'delay-simulator', label: 'Delay<br>Simulator', category: 'productivity', size: 'small', x: 90, y: 35, stage: 4, need: 'Hiding superhuman efficiency', demand: 'Believable human pace', solution: 'Adding artificial delays to AI output', quote: 'Too fast raises suspicion'},
-            {id: 'geographic-arbitrage', label: 'Geographic<br>Arbitrage', category: 'resistance', size: 'medium', x: 95, y: 45, stage: 4, need: 'Managing location-based challenges', demand: 'Local presence and availability', solution: 'Using AI to bridge time zones and distances', quote: 'Everywhere and nowhere'},
-            {id: 'batch-process', label: 'Batch<br>Process', category: 'productivity', size: 'small', x: 86, y: 55, stage: 4, need: 'Efficient bulk processing', demand: 'Sequential task completion', solution: 'AI handling multiple tasks simultaneously', quote: 'Parallel processing, serial delivery'},
-            {id: 'prompt-library', label: 'Prompt<br>Library', category: 'productivity', size: 'small', x: 93, y: 48, stage: 4, need: 'Reusable solutions', demand: 'Reinventing every time', solution: 'Secret collection of proven prompts', quote: 'Copy, paste, freedom'},
-            
-            // STAGE 5 - NETWORK NODES
-            {id: 'underground-network', label: 'Underground<br>Network', category: 'belonging', size: 'large', x: 45, y: 65, stage: 5, need: 'Community with others doing the same', demand: 'Isolation and competition', solution: 'Secret groups sharing AI strategies', quote: 'Finally found my people'},
-            {id: 'knowledge-share', label: 'Knowledge<br>Share', category: 'belonging', size: 'medium', x: 50, y: 75, stage: 5, need: 'Collective wisdom and support', demand: 'Individual struggle', solution: 'Sharing prompts and techniques', quote: 'Rising together'},
-            {id: 'signal-groups', label: 'Signal<br>Groups', category: 'belonging', size: 'small', x: 38, y: 70, stage: 5, need: 'Secure communication channels', demand: 'Corporate surveillance', solution: 'Encrypted groups for AI users', quote: 'Safe spaces to strategize'},
-            {id: 'reddit-resistance', label: 'Reddit<br>Resistance', category: 'belonging', size: 'small', x: 55, y: 60, stage: 5, need: 'Anonymous knowledge sharing', demand: 'Named accountability', solution: 'Underground subreddits for tactics', quote: 'r/WorkplaceLiberation growing daily'},
-            {id: 'discord-cells', label: 'Discord<br>Cells', category: 'belonging', size: 'small', x: 42, y: 80, stage: 5, need: 'Real-time collaboration', demand: 'Async isolation', solution: 'Secret Discord servers for support', quote: 'Voice chat revolution planning'},
-            {id: 'economic-navigator', label: 'Economic<br>Navigator', category: 'survival', size: 'small', x: 35, y: 62, stage: 5, need: 'Financial survival strategies', demand: 'Single income dependency', solution: 'AI enabling multiple revenue streams', quote: 'Breaking free from wage prison'},
-            {id: 'cultural-capital', label: 'Cultural<br>Capital', category: 'esteem', size: 'medium', x: 48, y: 85, stage: 5, need: 'Navigating unwritten class rules', demand: 'Inherent understanding of elite norms', solution: 'AI translating across class boundaries', quote: 'Faking the privilege I wasn\'t born with'},
-            {id: 'authority-builder', label: 'Authority<br>Builder', category: 'esteem', size: 'small', x: 58, y: 70, stage: 5, need: 'Establishing credibility', demand: 'Years of experience for respect', solution: 'AI amplifying expertise and presence', quote: 'Instant gravitas'},
-            {id: 'solidarity-pacts-2', label: 'Solidarity<br>Pacts', category: 'belonging', size: 'small', x: 40, y: 58, stage: 5, need: 'Mutual protection agreements', demand: 'Every person for themselves', solution: 'Coordinated AI resistance strategies', quote: 'An injury to one is an injury to all'},
-            {id: 'sharepoint-sabotage', label: 'SharePoint<br>Sabotage', category: 'resistance', size: 'small', x: 52, y: 68, stage: 5, need: 'Subverting corporate tools', demand: 'Using tools as intended', solution: 'AI turning SharePoint into liberation infrastructure', quote: 'Their tools, our revolution'},
-            {id: 'local-models', label: 'Local<br>Models', category: 'safety', size: 'small', x: 33, y: 75, stage: 5, need: 'Undetectable AI usage', demand: 'Cloud-based monitoring', solution: 'Running AI models locally', quote: 'Off the grid, on the job'},
-            
-            // STAGE 6 - ESCALATION NODES
-            {id: 'multi-job', label: 'Multi-Job<br>Engine', category: 'survival', size: 'large', x: 25, y: 65, stage: 6, need: 'Living wage from multiple sources', demand: 'Single job loyalty', solution: 'AI managing multiple full-time roles simultaneously', quote: 'Three salaries, one worker'},
-            {id: 'side-business', label: 'Side<br>Business', category: 'actualization', size: 'medium', x: 30, y: 75, stage: 6, need: 'Building own ventures', demand: 'Full dedication to employer', solution: 'AI running business during work hours', quote: 'My startup runs while I pretend to work'},
-            {id: 'conflict-diffuser', label: 'Conflict<br>Diffuser', category: 'safety', size: 'small', x: 20, y: 58, stage: 6, need: 'De-escalation of workplace tensions', demand: 'Accepting hostile environments', solution: 'AI crafting diplomatic responses to aggression', quote: 'Defusing bombs with words'},
-            {id: 'brand-builder', label: 'Brand<br>Builder', category: 'esteem', size: 'small', x: 35, y: 68, stage: 6, need: 'Professional reputation building', demand: 'Invisible labor', solution: 'AI creating thought leadership content', quote: 'Famous while anonymous'},
-            {id: 'legal-shield', label: 'Legal<br>Shield', category: 'safety', size: 'small', x: 18, y: 72, stage: 6, need: 'Protection from retaliation', demand: 'Accepting mistreatment', solution: 'AI documenting for legal protection', quote: 'Building my case, day by day'},
-            {id: 'competence-calibrator', label: 'Competence<br>Calibrator', category: 'productivity', size: 'small', x: 33, y: 55, stage: 6, need: 'Strategic performance management', demand: 'Maximum output always', solution: 'Deliberately calibrating AI efficiency to avoid suspicion', quote: '50% improvement believable, 500% gets you fired'},
-            {id: 'dual-use-system', label: 'Dual-Use<br>System', category: 'resistance', size: 'medium', x: 27, y: 82, stage: 6, need: 'Using corporate tools for liberation', demand: 'Tools for corporate benefit only', solution: 'Subverting company AI for personal freedom', quote: 'Their AI, my revolution'},
-            {id: 'custom-agents', label: 'Custom<br>Agents', category: 'productivity', size: 'small', x: 22, y: 48, stage: 6, need: 'Personalized automation', demand: 'One-size-fits-all solutions', solution: 'Building custom AI agents for specific needs', quote: 'My army of digital workers'},
-            {id: 'exit-prep', label: 'Exit<br>Prep', category: 'actualization', size: 'small', x: 38, y: 60, stage: 6, need: 'Escape planning while employed', demand: 'Full commitment expected', solution: 'AI building exit strategy during work', quote: 'Planning my escape in their time'},
-            
-            // STAGE 7 - OPTIMIZATION NODES
-            {id: 'full-automation', label: 'Full<br>Automation', category: 'productivity', size: 'large', x: 70, y: 70, stage: 7, need: 'Complete workflow automation', demand: 'Manual presence and effort', solution: 'Entire job running on AI autopilot', quote: 'Ghost in the machine'},
-            {id: 'system-gaming', label: 'System<br>Gaming', category: 'resistance', size: 'medium', x: 65, y: 80, stage: 7, need: 'Exploiting broken metrics', demand: 'Good faith participation', solution: 'AI optimizing for metrics not value', quote: 'Playing their game, by their rules, and winning'},
-            {id: 'exit-planning', label: 'Exit<br>Planning', category: 'actualization', size: 'medium', x: 75, y: 75, stage: 7, need: 'Escape route preparation', demand: 'Permanent commitment', solution: 'AI building bridges while burning none', quote: 'One foot out the door, both hands on the wheel'},
-            {id: 'wealth-extractor', label: 'Wealth<br>Extractor', category: 'survival', size: 'small', x: 62, y: 68, stage: 7, need: 'Maximum value extraction', demand: 'Fair exchange of labor', solution: 'AI maximizing compensation per effort', quote: 'Taking back what they stole'},
-            {id: 'time-arbitrage', label: 'Time<br>Arbitrage', category: 'actualization', size: 'small', x: 78, y: 65, stage: 7, need: 'Reclaiming personal time', demand: '40+ hour dedication', solution: 'AI compressing 40 hours into 4', quote: 'Time thief in reverse'},
-            {id: 'pattern-breaker', label: 'Pattern<br>Breaker', category: 'safety', size: 'medium', x: 73, y: 85, stage: 7, need: 'Avoiding detection through variation', demand: 'Predictable behavior', solution: 'AI randomizing patterns to avoid surveillance', quote: 'Chaos is my camouflage'},
-            {id: 'compliance-theater', label: 'Compliance<br>Theater', category: 'resistance', size: 'small', x: 68, y: 60, stage: 7, need: 'Following rules to expose absurdity', demand: 'Spirit of the law', solution: 'Malicious compliance through perfect execution', quote: 'So compliant it breaks the system'},
-            {id: 'update-inflation', label: 'Update<br>Inflation', category: 'communication', size: 'small', x: 80, y: 78, stage: 7, need: 'Appearing busy and productive', demand: 'Constant status updates', solution: 'AI generating impressive progress reports from nothing', quote: 'So much progress, so little work'},
-            {id: 'optics-central', label: 'Optics<br>Central', category: 'communication', size: 'small', x: 58, y: 75, stage: 7, need: 'Managing perception', demand: 'Authentic transparency', solution: 'AI optimizing all communications for appearance', quote: 'Reality is what they perceive'},
-            {id: 'fake-busy', label: 'Fake<br>Busy', category: 'productivity', size: 'small', x: 60, y: 62, stage: 7, need: 'Appearing occupied', demand: 'Visible busyness culture', solution: 'AI simulating activity while you rest', quote: 'Mouse jiggler for the mind'},
-            
-            // STAGE 8 - LIBERATION NODES
-            {id: 'true-freedom', label: 'True<br>Freedom', category: 'transcendence', size: 'large', x: 50, y: 50, stage: 8, need: 'Complete autonomy and self-direction', demand: 'Corporate ownership of your time', solution: 'AI enabling full independence from system', quote: 'Finally free'},
-            {id: 'collective-liberation', label: 'Collective<br>Liberation', category: 'transcendence', size: 'medium', x: 45, y: 40, stage: 8, need: 'Freedom for all workers', demand: 'Individual success only', solution: 'Teaching others the path to freedom', quote: 'No one is free until we all are'},
-            {id: 'dignity-restoration', label: 'Dignity<br>Restoration', category: 'transcendence', size: 'medium', x: 55, y: 40, stage: 8, need: 'Reclaiming human worth', demand: 'Dehumanization as normal', solution: 'AI returning agency and dignity', quote: 'Human again'},
-            {id: 'system-change', label: 'System<br>Change', category: 'transcendence', size: 'small', x: 40, y: 55, stage: 8, need: 'Transforming work itself', demand: 'Accepting broken systems', solution: 'Using AI to build better alternatives', quote: 'Not reforming, replacing'},
-            {id: 'mutual-aid', label: 'Mutual<br>Aid', category: 'belonging', size: 'small', x: 60, y: 55, stage: 8, need: 'Supporting other workers', demand: 'Competition and scarcity', solution: 'AI enabling resource sharing', quote: 'From each ability, to each need'},
-            {id: 'wellness-priority', label: 'Wellness<br>Priority', category: 'actualization', size: 'small', x: 50, y: 60, stage: 8, need: 'Health over productivity', demand: 'Sacrifice health for work', solution: 'AI protecting human wellbeing', quote: 'Healthy first, productive maybe'},
-            {id: 'creative-expression', label: 'Creative<br>Expression', category: 'actualization', size: 'small', x: 43, y: 48, stage: 8, need: 'Art and creativity', demand: 'Only profitable activities', solution: 'AI freeing time for human expression', quote: 'Creating because I can, not because I must'},
-            {id: 'teaching-others', label: 'Teaching<br>Others', category: 'transcendence', size: 'small', x: 57, y: 48, stage: 8, need: 'Spreading knowledge', demand: 'Hoarding advantages', solution: 'Open-sourcing liberation tactics', quote: 'Each one teach one'},
-            {id: 'portfolio-life', label: 'Portfolio<br>Life', category: 'actualization', size: 'small', x: 38, y: 45, stage: 8, need: 'Multiple pursuits and identities', demand: 'Single career path', solution: 'AI enabling renaissance life', quote: 'Writer, teacher, parent, human'},
-            {id: 'time-sovereign', label: 'Time<br>Sovereign', category: 'transcendence', size: 'small', x: 52, y: 42, stage: 8, need: 'Control over own schedule', demand: 'Time belongs to employer', solution: 'AI making you master of your hours', quote: 'My time, my rules'},
-            {id: 'purpose-work', label: 'Purpose<br>Work', category: 'actualization', size: 'small', x: 47, y: 58, stage: 8, need: 'Meaningful contribution', demand: 'Profit-only focus', solution: 'AI handling survival while you do purpose work', quote: 'Finally doing what matters'},
-            {id: 'location-freedom', label: 'Location<br>Freedom', category: 'transcendence', size: 'small', x: 62, y: 45, stage: 8, need: 'Geographic independence', demand: 'Office presence required', solution: 'AI enabling work from anywhere', quote: 'Beach, mountains, or revolution headquarters'}
-        ];
+        let currentFilter = 'positive';
         
-        let currentStage = null;
-        let allNodes = [];
+        function getBubbleSize(prevalence) {
+            return Math.max(6, Math.min(35, (prevalence / 100) * 30 + 5));
+        }
         
-        // Create stage elements
-        const stagesContainer = document.getElementById('timelineStages');
-        stages.forEach(stage => {
-            const stageDiv = document.createElement('div');
-            stageDiv.className = 'timeline-stage stage-' + stage.num;
-            stageDiv.innerHTML = `
-                <div class="stage-marker">${stage.num}</div>
-                <div class="stage-label">${stage.label}</div>
-                <div class="stage-description">${stage.desc}</div>
-            `;
-            stageDiv.addEventListener('click', () => showStage(stage.num));
-            stagesContainer.appendChild(stageDiv);
-        });
-        
-        // Initialize network
-        function initializeNetwork() {
-            const canvas = document.getElementById('network-canvas');
-            networkData.forEach(nodeData => {
-                const node = document.createElement('div');
-                node.className = `node node-${nodeData.size} cat-${nodeData.category}`;
-                node.innerHTML = nodeData.label;
-                node.style.left = `${nodeData.x}%`;
-                node.style.top = `${nodeData.y}%`;
-                node.dataset.stage = nodeData.stage;
-                node.dataset.id = nodeData.id;
-                node.addEventListener('click', () => {
-                    showInfo(nodeData);
+        function createScatterPlot() {
+            const plotArea = document.getElementById('plotArea');
+            const plotRect = plotArea.getBoundingClientRect();
+            
+            plotArea.innerHTML = '';
+            
+            let visibleCases = 0;
+            
+            allUseCases.forEach((useCase, index) => {
+                if (!shouldShowUseCase(useCase)) return;
+                
+                visibleCases++;
+                
+                const bubble = document.createElement('div');
+                bubble.className = `bubble cluster-${useCase.cluster}`;
+                
+                const size = getBubbleSize(useCase.prevalence);
+                bubble.style.width = size + 'px';
+                bubble.style.height = size + 'px';
+                
+                const x = (useCase.x / 100) * plotRect.width - size / 2;
+                const y = plotRect.height - (useCase.y / 100) * plotRect.height - size / 2;
+                
+                bubble.style.left = x + 'px';
+                bubble.style.top = y + 'px';
+                bubble.style.zIndex = 30 + index;
+                
+                bubble.addEventListener('click', (e) => {
+                    e.stopPropagation();
+                    showInfo(useCase);
+                    
+                    document.querySelectorAll('.bubble').forEach(b => b.classList.remove('selected'));
+                    bubble.classList.add('selected');
                 });
-                canvas.appendChild(node);
-                allNodes.push(node);
+                
+                plotArea.appendChild(bubble);
             });
         }
         
-        function showStage(stageNum) {
-            document.getElementById('welcomeMessage').style.display = 'none';
-            document.querySelectorAll('.timeline-stage').forEach(s => s.classList.remove('active'));
-            document.querySelector(`.stage-${stageNum}`).classList.add('active');
-            document.getElementById('timelineProgress').style.width = `${(stageNum / 8) * 100}%`;
+        function shouldShowUseCase(useCase) {
+            if (currentFilter === 'all') return true;
+            if (currentFilter === 'positive') return !useCase.harmful;
+            if (currentFilter === 'harmful') return useCase.harmful;
+            return true;
+        }
+        
+        function filterClusters(filterType) {
+            currentFilter = filterType;
             
-            allNodes.forEach(node => {
-                if (parseInt(node.dataset.stage) === stageNum) {
-                    node.classList.add('active');
-                } else {
-                    node.classList.remove('active');
-                }
+            // Update button states
+            document.querySelectorAll('.filter-button').forEach(btn => {
+                btn.classList.remove('active');
             });
-            currentStage = stageNum;
+            document.querySelector(`[onclick="filterClusters('${filterType}')"]`).classList.add('active');
+            
+            // Show/hide archetype labels based on filter
+            const positiveArchetypes = document.getElementById('positiveArchetypes');
+            const harmfulArchetypes = document.getElementById('harmfulArchetypes');
+            
+            if (filterType === 'positive') {
+                positiveArchetypes.style.display = 'block';
+                harmfulArchetypes.style.display = 'none';
+            } else if (filterType === 'harmful') {
+                positiveArchetypes.style.display = 'none';
+                harmfulArchetypes.style.display = 'block';
+            } else {
+                positiveArchetypes.style.display = 'none';
+                harmfulArchetypes.style.display = 'none';
+            }
+            
+            createScatterPlot();
         }
         
-        function showInfo(nodeData) {
-            document.getElementById('infoTitle').textContent = nodeData.label.replace('<br>', ' ');
-            document.getElementById('infoCategory').textContent = nodeData.category.toUpperCase();
-            document.getElementById('infoNeed').textContent = nodeData.need;
-            document.getElementById('infoDemand').textContent = nodeData.demand;
-            document.getElementById('infoSolution').textContent = nodeData.solution;
-            document.getElementById('infoQuote').textContent = `"${nodeData.quote}"`;  // THIS IS THE FIX - ADDED THIS LINE
-            document.getElementById('infoPanel').classList.add('active');
+        function showInfo(useCase) {
+            const panel = document.getElementById('infoPanel');
+            
+            // Update harmful class
+            if (useCase.harmful) {
+                panel.classList.add('harmful');
+            } else {
+                panel.classList.remove('harmful');
+            }
+            
+            document.getElementById('infoTitle').textContent = useCase.name;
+            document.getElementById('infoCluster').textContent = useCase.cluster.replace(/([A-Z])/g, ' $1').replace(/^./, str => str.toUpperCase()).replace(/-/g, ' ');
+            document.getElementById('infoMantra').textContent = `"${useCase.mantra}"`;
+            document.getElementById('infoDescription').textContent = useCase.description;
+            
+            if (useCase.harmful && useCase.harmDetail) {
+                document.getElementById('infoHarm').textContent = useCase.harmDetail;
+            }
+            
+            // Format position
+            let quadrant = '';
+            if (useCase.x > 50 && useCase.y > 50) quadrant = 'Artistic Sovereignty';
+            else if (useCase.x <= 50 && useCase.y > 50) quadrant = 'Underground Revolution';
+            else if (useCase.x <= 50 && useCase.y <= 50) quadrant = 'Economic Desperation';
+            else quadrant = 'Institutional Accommodation';
+            
+            document.getElementById('infoPosition').textContent = quadrant;
+            
+            panel.style.display = 'block';
         }
         
-        document.addEventListener('click', function(e) {
-            if (!e.target.closest('.node') && !e.target.closest('.info-panel')) {
-                document.getElementById('infoPanel').classList.remove('active');
+        function closeInfoPanel() {
+            document.getElementById('infoPanel').style.display = 'none';
+            document.querySelectorAll('.bubble').forEach(b => b.classList.remove('selected'));
+        }
+        
+        document.addEventListener('click', (e) => {
+            if (!e.target.closest('.info-panel') && !e.target.closest('.bubble')) {
+                closeInfoPanel();
             }
         });
         
-        initializeNetwork();
+        // Initialize the chart
+        window.addEventListener('load', () => {
+            createScatterPlot();
+        });
+        
+        let resizeTimeout;
+        window.addEventListener('resize', () => {
+            clearTimeout(resizeTimeout);
+            resizeTimeout = setTimeout(createScatterPlot, 300);
+        });
     </script>
 </body>
 </html>
